@@ -1,3 +1,11 @@
+##Clasificador para la red neuronal convolucional del TT##
+##Creado el 12/11/2021
+##Karla Ortiz Chávez 
+##Irvin Yoariht Macedo Cruz 
+##Angel Ramón Piñon Cabañero
+##Irving Daniel Sanchez Pizano
+
+##Librerias 
 import numpy as np 
 import os 
 import re 
@@ -20,8 +28,7 @@ from tensorflow.keras.layers import (
 ##from keras.layers.normalization import BatchNormalization
 from keras.layers.advanced_activations import LeakyReLU
 
-dirname = os.path.join(os.getcwd(), 'Aprendizaje_Abecedario')
-imgpath = dirname + os.sep 
+ejemplo_directorio = 'C:/Users/Karla/TT_ESCOM/Aprendizaje_Abecedario' ##Directorio donde se encuentran las imagenes para el aprendizaje
  
 images = []
 directories = []
@@ -29,9 +36,9 @@ dircount = [0]
 prevRoot=''
 cant=0
  
-print("leyendo imagenes de ",imgpath)
+print("leyendo imagenes de ",ejemplo_directorio)
  
-for root, dirnames, filenames in os.walk(imgpath):
+for root, dirnames, filenames in os.walk(ejemplo_directorio):
     for filename in filenames:
         if re.search("\.(jpg|jpeg|png|bmp|tiff)$", filename):
             cant=cant+1
@@ -55,4 +62,28 @@ if len(dircount) > 1:
 print('Directorios leidos:',len(directories))
 print("Imagenes en cada directorio", dircount)
 print('suma Total de imagenes en subdirs:',sum(dircount))
-            
+
+
+##Creacion de etiquetas 
+
+etiquetas = [] 
+indice = 0 
+for cantidad in dircount: 
+    for i in range(cantidad): 
+        etiquetas.append(indice)
+    indice = indice+1
+print("Cantidad de etiquetas creadas: ", len(etiquetas))
+Abecedario_fijo=[]
+indice = 0
+for directorio in directories: 
+    name = directorio.split(os.sep)
+    print(indice, name[len(name)-1])
+    Abecedario_fijo.append(name[len(name)-1])
+    indice = indice+1
+y = np.array(etiquetas)
+x = np.array(images, dtype=np.uint8)
+
+classes = np.unique(y)
+nClasses = len(classes)
+print('Total de numeros de salidas: ', nClasses)
+print('Clases de salidas: ', classes)
