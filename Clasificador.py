@@ -87,3 +87,24 @@ classes = np.unique(y)
 nClasses = len(classes)
 print('Total de numeros de salidas: ', nClasses)
 print('Clases de salidas: ', classes)
+
+
+##Entrenamiento Test validacion 
+
+train_X, test_X, train_Y, test_Y = train_test_split(X,y, test_size = 0.2)
+print('Aprendizaje: ', train_X.shape, train_Y.shape)
+print('Test', test_X.shape, test_Y.shape)
+
+train_X = train_X.astype('float32')
+test_X = test_X.astype('float32')
+train_X = train_X/255
+test_X = test_X/255
+
+train_Y_one_hot = to_categorical(train_Y)
+test_Y_one_hot  = to_categorical(test_Y)
+
+print('Etiqueta original: ', train_Y[0])
+print('Despues de la conversion: ', train_Y_one_hot[0])
+
+train_X, valid_X, train_label, valid_label = train_test_split(train_X, train_Y_one_hot, test_size = 0.2, random_state = 13)
+print(train_X.shape, valid_X.shape, train_label.shape, valid_label.shape)
