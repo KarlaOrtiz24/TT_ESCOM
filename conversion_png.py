@@ -1,6 +1,7 @@
 import PIL
 import os
 import pathlib
+import cv2 as cv
 
 actual_path = pathlib.Path(__file__).parent.absolute()
 print(actual_path)
@@ -34,9 +35,13 @@ for img_dir in list_img_real_dir:
     print('Directorio:', img_dir)
     files = os.listdir(img_dir)
     for file in files:
+        img = cv.imread(os.path.join(img_dir, file))
+        res = cv.resize(img, dsize=(21, 28), interpolation=cv.INTER_CUBIC)
         print('Archivo:', file)
+        filename_list = file.split('.')
+        
+        final_path = os.path.join(img_dir, filename_list[0]) + '.png'
+        cv.imwrite(final_path, res)
+        print('Nuevo archivo escrito con exito!')
         files_cant += 1
         labels.append(files_cant)
-
-for label in labels:
-    print('Etiqueta:', label)
