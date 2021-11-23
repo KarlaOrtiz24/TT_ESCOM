@@ -102,19 +102,41 @@ print('Lista de clases: ', classes)  #Nos dice las clases
 ##Entrenamiento Test validacion 
 
 train_X,test_X,train_Y,test_Y = train_test_split(X,y,test_size=0.2)
-print('Aprendizaje: ', train_X.shape, train_Y.shape)
-print('Entrenamiento : ', test_X.shape, test_Y.shape)
+print('Aprendizaje: ', train_X.shape, train_Y.shape)#80% aprendizaje
+print('Recuperación : ', test_X.shape, test_Y.shape)#20% recuperación 
 
 train_X = train_X.astype('float32')
 test_X = test_X.astype('float32')
 train_X = train_X/255
-test_X = test_X/255
+test_X = test_X/255 #Normalizarlo, 0, 1 
 
 train_Y_one_hot = to_categorical(train_Y)
 test_Y_one_hot  = to_categorical(test_Y)
 
 print('Etiqueta original: ', train_Y[0])
-print('Despues de la conversion: ', train_Y_one_hot[0])
+print('Despues de la conversion: ', train_Y_one_hot[0]) #A(1, 0,0,0,0,0,0,0,0,0)
 
 train_X, valid_X, train_label, valid_label = train_test_split(train_X, train_Y_one_hot, test_size = 0.2, random_state = 13)
+<<<<<<< HEAD
 print(train_X.shape, valid_X.shape, train_label.shape, valid_label.shape)
+=======
+print(train_X.shape, valid_X.shape, train_label.shape, valid_label.shape)
+
+
+##Construccion de la red 
+
+ABC_model = Sequential() 
+ABC_model.add = (Dense(588, input_shape=(28,21,3), activation='relu'))
+##Guardamos la red 
+
+ABC_train_dropout = ABC_model.fit(train_X, train_label, batch_size=batch_size,epochs=epochs,verbose=1,validation_data=(valid_X, valid_label))
+
+# guardamos la red, para reutilizarla en el futuro, sin tener que volver a entrenar
+ABC_model.save("ABECEDARIO.h5py")
+
+
+##Test 
+test_eval = ABC_model.evaluate(test_X, test_Y_one_hot, verbose=1)
+print('Error', test_eval[0])
+print('Exactitud:', test_eval[1])
+>>>>>>> 5163686a70d56fd68a9803f014aa1f526bd87463
