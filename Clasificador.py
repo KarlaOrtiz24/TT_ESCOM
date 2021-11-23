@@ -59,7 +59,7 @@ dircount = []
 images =[] #Lista de imagenes
 
 for img_dir in list_img_real_directorio:
-      ##  print('Directorio:', img_dir)
+    #  print('Directorio:', img_dir)
     files = os.listdir(img_dir)
     dircount.append(len(files))
 
@@ -68,9 +68,9 @@ for img_dir in list_img_real_directorio:
         img = cv.imread(os.path.join(img_dir,file))
         images.append(img)
         img_array = np.asarray(img)
-      ##  print("IMG ARRAY", img_array)
+        ##print("IMG ARRAY", img_array)
         #print(len(img_array))
-       # print("IMG", img)
+        # print("IMG", img)
         files_cant += 1
 
 ##Creacion de etiquetas, etiquetado de todos los datos. 
@@ -89,7 +89,7 @@ for directorio in list_img_real_directorio:
     print(indice , name[len(name)-1])
     Abecedario_fijo.append(name[len(name)-1])
     indice=indice+1
- 
+
 y = np.array(labels)
 X = np.asarray(images) #Se convierten las imagenes a datos numpy 
 
@@ -102,8 +102,8 @@ print('Lista de clases: ', classes)  #Nos dice las clases
 ##Entrenamiento Test validacion 
 
 train_X,test_X,train_Y,test_Y = train_test_split(X,y,test_size=0.2)
-print('Aprendizaje: ', train_X.shape, train_Y.shape)#80% aprendizaje
-print('Recuperación : ', test_X.shape, test_Y.shape)#20% recuperación 
+print('Aprendizaje:', train_X.shape, train_Y.shape)#80% aprendizaje
+print('Recuperación:', test_X.shape, test_Y.shape)#20% recuperación
 
 train_X = train_X.astype('float32')
 test_X = test_X.astype('float32')
@@ -118,24 +118,38 @@ print('Despues de la conversion: ', train_Y_one_hot[0]) #A(1, 0,0,0,0,0,0,0,0,0)
 
 train_X, valid_X, train_label, valid_label = train_test_split(train_X, train_Y_one_hot, test_size = 0.2, random_state = 13)
 
-print(train_X.shape, valid_X.shape, train_label.shape, valid_label.shape)
-print(train_X.shape, valid_X.shape, train_label.shape, valid_label.shape)
+# el método shape da la cantidad de datos que contiene un arreglo
+
+# print('train_X: ', train_X.shape)
+# print('valid_X: ', valid_X.shape)
+
+# print('train_label:', train_label.shape)
+# print('valid_label:', valid_label.shape)
+
+
+print(train_X.shape,valid_X.shape,train_label.shape,valid_label.shape)
 
 
 ##Construccion de la red 
 
 ABC_model = Sequential() 
-ABC_model.add = (Dense(588, input_shape=(28,21,3), activation='relu'))
+ABC_model.add(Flatten(input_shape=(28,28,3), name = 'Input_layer'))
+ABC_model.add(Dense(100, activation='sigmoid', name = 'Hidden_layer_1'))
+ABC_model.add(Dropout(0.8))
+ABC_model.add(Dense(250, activation='sigmoid', name = 'Hidden_layer_2'))
+ABC_model.add(Dropout(0.7))
+ABC_model.add(Dense(21, activation='softmax', name='Output_layer'))
+
+ABC_model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])  
+ABC_model.summary()
+
+from keras.callbacks import EarlyStopping
+early_stop = EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True)
+
 ##Guardamos la red 
+# ABC_train_dropout = ABC_model.fit(train_X, train_label, batch_size=batch_size,epochs=epochs,verbose=1,validation_data=(valid_X, valid_label))
 
-ABC_train_dropout = ABC_model.fit(train_X, train_label, batch_size=batch_size,epochs=epochs,verbose=1,validation_data=(valid_X, valid_label))
+# # guardamos la red, para reutilizarla en el futuro, sin tener que volver a entrenar
+# ABC_model.save("ABECEDARIO.h5py")
 
-# guardamos la red, para reutilizarla en el futuro, sin tener que volver a entrenar
-ABC_model.save("ABECEDARIO.h5py")
-
-
-##Test 
-test_eval = ABC_model.evaluate(test_X, test_Y_one_hot, verbose=1)
-print('Error', test_eval[0])
-print('Exactitud:', test_eval[1])
-
+abc = ABC_model.fit(train_X, train_label, batch_size=32, epochs=50, verbose=1, validation_data=(valid_X, valid_label), shuffle=True, callbacks = [early_stop])
