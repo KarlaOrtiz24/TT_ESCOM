@@ -59,7 +59,7 @@ dircount = []
 images =[] #Lista de imagenes
 
 for img_dir in list_img_real_directorio:
-  ##  print('Directorio:', img_dir)
+      ##  print('Directorio:', img_dir)
     files = os.listdir(img_dir)
     dircount.append(len(files))
 
@@ -118,39 +118,3 @@ print('Despues de la conversion: ', train_Y_one_hot[0])
 
 train_X, valid_X, train_label, valid_label = train_test_split(train_X, train_Y_one_hot, test_size = 0.2, random_state = 13)
 print(train_X.shape, valid_X.shape, train_label.shape, valid_label.shape)
-
-
-##Construccion de la red :O
-
-INIT_LR = 1e-3
-epochs = 6
-batch_size = 64
-
-ABC_model = Sequential()
-ABC_model.add(Conv2D(4, kernel_size=(3, 3),activation='linear',padding='same',input_shape=(28,21,3)))
-ABC_model.add(LeakyReLU(alpha=0.01))
-ABC_model.add(MaxPooling2D((2, 2),padding='same'))
-ABC_model.add(Dropout(0.5))
-
-ABC_model.add(Flatten())
-ABC_model.add(Dense(32, activation='linear'))
-ABC_model.add(LeakyReLU(alpha=0.01))
-ABC_model.add(Dropout(0.5)) 
-ABC_model.add(Dense(nClasses, activation='softmax'))
-
-ABC_model.summary()
-ABC_model.compile(loss=keras.losses.categorical_crossentropy, optimizer = tensorflow.keras.optimizers.Adagrad(learning_rate=INIT_LR, decay=INIT_LR / 100), metrics=['accuracy'])
-
-##Guardamos la red 
-
-ABC_train_dropout = ABC_model.fit(train_X, train_label, batch_size=batch_size,epochs=epochs,verbose=1,validation_data=(valid_X, valid_label))
-
-# guardamos la red, para reutilizarla en el futuro, sin tener que volver a entrenar
-ABC_model.save("ABECEDARIO.h5py")
-
-
-##Test 
-test_eval = ABC_model.evaluate(test_X, test_Y_one_hot, verbose=1)
-
-print('Test loss:', test_eval[0])
-print('Test accuracy:', test_eval[1])
