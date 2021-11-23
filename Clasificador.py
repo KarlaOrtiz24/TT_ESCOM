@@ -117,9 +117,8 @@ print('Etiqueta original: ', train_Y[0])
 print('Despues de la conversion: ', train_Y_one_hot[0]) #A(1, 0,0,0,0,0,0,0,0,0)
 
 train_X, valid_X, train_label, valid_label = train_test_split(train_X, train_Y_one_hot, test_size = 0.2, random_state = 13)
-<<<<<<< HEAD
+
 print(train_X.shape, valid_X.shape, train_label.shape, valid_label.shape)
-=======
 print(train_X.shape, valid_X.shape, train_label.shape, valid_label.shape)
 
 
@@ -139,4 +138,4 @@ ABC_model.save("ABECEDARIO.h5py")
 test_eval = ABC_model.evaluate(test_X, test_Y_one_hot, verbose=1)
 print('Error', test_eval[0])
 print('Exactitud:', test_eval[1])
->>>>>>> 5163686a70d56fd68a9803f014aa1f526bd87463
+
