@@ -116,7 +116,7 @@ test_Y_one_hot  = to_categorical(test_Y)
 print('Etiqueta original: ', train_Y[0])
 print('Despues de la conversion: ', train_Y_one_hot[0]) #A(1, 0,0,0,0,0,0,0,0,0)
 
-train_X, valid_X, train_label, valid_label = train_test_split(train_X, train_Y_one_hot, test_size = 0.2, random_state = 13)
+train_X, valid_X, train_label, valid_label = train_test_split(train_X, train_Y_one_hot, test_size = 0.2, random_state = 4)
 
 # el método shape da la cantidad de datos que contiene un arreglo
 
@@ -134,17 +134,17 @@ print(train_X.shape,valid_X.shape,train_label.shape,valid_label.shape)
 
 ABC_model = Sequential() 
 ABC_model.add(Flatten(input_shape=(28,28,3), name = 'Input_layer'))
-ABC_model.add(Dense(100, activation='sigmoid', name = 'Hidden_layer_1'))
-ABC_model.add(Dropout(0.8))
-ABC_model.add(Dense(250, activation='sigmoid', name = 'Hidden_layer_2'))
-ABC_model.add(Dropout(0.7))
+ABC_model.add(Dense(350, activation='relu', name = 'Hidden_layer_1'))
+ABC_model.add(Dropout(0.2))
+ABC_model.add(Dense(50, activation='sigmoid', name = 'Hidden_layer_2'))
+#ABC_model.add(Dropout(0.3))
 ABC_model.add(Dense(21, activation='softmax', name='Output_layer'))
 
 ABC_model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])  
 ABC_model.summary()
 
 from keras.callbacks import EarlyStopping
-early_stop = EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True)
+#early_stop = EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True)
 
 ##Guardamos la red 
 # ABC_train_dropout = ABC_model.fit(train_X, train_label, batch_size=batch_size,epochs=epochs,verbose=1,validation_data=(valid_X, valid_label))
@@ -152,4 +152,14 @@ early_stop = EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=
 # # guardamos la red, para reutilizarla en el futuro, sin tener que volver a entrenar
 # ABC_model.save("ABECEDARIO.h5py")
 
-abc = ABC_model.fit(train_X, train_label, batch_size=32, epochs=50, verbose=1, validation_data=(valid_X, valid_label), shuffle=True, callbacks = [early_stop])
+abc = ABC_model.fit(train_X, train_label, batch_size=32, epochs=50, verbose=1, validation_data=(valid_X, valid_label), shuffle=True)
+plt.figure(0)  
+plt.plot(abc.history['accuracy'],'r')  
+plt.plot(abc.history['val_accuracy'],'g')  
+plt.xticks(np.arange(0, 11, 2.0))  
+plt.rcParams['figure.figsize'] = (8, 6)  
+plt.xlabel("Num of Epochs")  
+plt.ylabel("Accuracy")  
+plt.title("Training Accuracy vs Validation Accuracy")  
+plt.legend(['train','validation'])
+plt.show()
