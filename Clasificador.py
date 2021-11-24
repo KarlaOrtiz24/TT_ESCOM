@@ -186,11 +186,11 @@ snn_predicted = np.argmax(snn_pred, axis=1)
 snn_cm = confusion_matrix(np.argmax(valid_label, axis=1), snn_predicted)
 
 # Visualizamos la matriz de confusión
-snn_df_cm = pd.DataFrame(snn_cm, range(100), range(100))  
-plt.figure(figsize = (20,14))  
-sn.set(font_scale=1.4) #for label size  
-sn.heatmap(snn_df_cm, annot=True, annot_kws={"size": 12}) # font size  
-plt.show()
+#snn_df_cm = pd.DataFrame(snn_cm, range(100), range(100))  
+#plt.figure(figsize = (20,14))  
+#sn.set(font_scale=1.4) #for label size  
+#sn.heatmap(snn_df_cm, annot=True, annot_kws={"size": 12}) # font size  
+#plt.show()
 
 plt.plot(abc.history['loss'],'c')  
 plt.plot(abc.history['val_loss'],'y')  
@@ -201,3 +201,8 @@ plt.ylabel("loss")
 plt.title("Training loss vs Validation loss")  
 plt.legend(['train','validation'])
 plt.show()
+
+imgplot = plt.imshow(train_X[0])  
+plt.show()  
+print('class for image 1: ' + str(np.argmax(train_label[0])))  
+print('predicted:         ' + str(snn_predicted[0]))
