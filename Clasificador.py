@@ -167,7 +167,6 @@ plt.xlabel("Num of Epochs")
 plt.ylabel("Accuracy")  
 plt.title("Training Accuracy vs Validation Accuracy")  
 plt.legend(['train','validation'])
-<<<<<<< HEAD
 
 plt.figure(1)  
 plt.plot(abc.history['loss'],'r')  
@@ -191,7 +190,6 @@ snn_df_cm = pd.DataFrame(snn_cm, range(100), range(100))
 plt.figure(figsize = (20,14))  
 sn.set(font_scale=1.4) #for label size  
 sn.heatmap(snn_df_cm, annot=True, annot_kws={"size": 12}) # font size  
-=======
 plt.show()
 
 plt.plot(abc.history['loss'],'c')  
@@ -202,5 +200,4 @@ plt.xlabel("Num of Epochs")
 plt.ylabel("loss")  
 plt.title("Training loss vs Validation loss")  
 plt.legend(['train','validation'])
->>>>>>> 5fdbecc907aea865a339a58b5ed4192f769e9242
 plt.show()
