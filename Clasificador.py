@@ -6,6 +6,7 @@
 ##Irving Daniel Sanchez Pizano
 
 ##Librerias 
+from abc import ABC
 import numpy as np 
 import cv2 as cv
 import os 
@@ -28,6 +29,9 @@ from tensorflow.keras.layers import (
     BatchNormalization, SeparableConv2D, MaxPooling2D, Activation, Flatten, Dropout, Dense
 )
 from keras.layers.advanced_activations import LeakyReLU
+from sklearn.metrics import confusion_matrix, classification_report
+import pandas as pd 
+import seaborn as sn 
 ## Nos situamos en la dirección actual 
 actual_path = pathlib.Path(__file__).parent.absolute()
 print(actual_path)
@@ -136,7 +140,7 @@ ABC_model = Sequential()
 ABC_model.add(Flatten(input_shape=(28,28,3), name = 'Input_layer'))
 ABC_model.add(Dense(350, activation='relu', name = 'Hidden_layer_1'))
 ABC_model.add(Dropout(0.2))
-ABC_model.add(Dense(50, activation='sigmoid', name = 'Hidden_layer_2'))
+#ABC_model.add(Dense(50, activation='sigmoid', name = 'Hidden_layer_2'))
 #ABC_model.add(Dropout(0.3))
 ABC_model.add(Dense(21, activation='softmax', name='Output_layer'))
 
@@ -144,7 +148,7 @@ ABC_model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['a
 ABC_model.summary()
 
 from keras.callbacks import EarlyStopping
-#early_stop = EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True)
+early_stop = EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True)
 
 ##Guardamos la red 
 # ABC_train_dropout = ABC_model.fit(train_X, train_label, batch_size=batch_size,epochs=epochs,verbose=1,validation_data=(valid_X, valid_label))
@@ -152,7 +156,8 @@ from keras.callbacks import EarlyStopping
 # # guardamos la red, para reutilizarla en el futuro, sin tener que volver a entrenar
 # ABC_model.save("ABECEDARIO.h5py")
 
-abc = ABC_model.fit(train_X, train_label, batch_size=32, epochs=50, verbose=1, validation_data=(valid_X, valid_label), shuffle=True)
+abc = ABC_model.fit(train_X, train_label, batch_size=250, epochs=10, verbose=1, validation_data=(valid_X, valid_label), validation_split = 0.2, shuffle=True)
+
 plt.figure(0)  
 plt.plot(abc.history['accuracy'],'r')  
 plt.plot(abc.history['val_accuracy'],'g')  
@@ -162,4 +167,27 @@ plt.xlabel("Num of Epochs")
 plt.ylabel("Accuracy")  
 plt.title("Training Accuracy vs Validation Accuracy")  
 plt.legend(['train','validation'])
+
+plt.figure(1)  
+plt.plot(abc.history['loss'],'r')  
+plt.plot(abc.history['val_loss'],'g')  
+plt.xticks(np.arange(0, 11, 2.0))  
+plt.rcParams['figure.figsize'] = (8, 6)  
+plt.xlabel("Num of Epochs")  
+plt.ylabel("Loss")  
+plt.title("Training Loss vs Validation Loss")  
+plt.legend(['train','validation'])
+plt.show()
+
+
+snn_pred = ABC_model.predict(train_label, batch_size=32, verbose=1)  
+snn_predicted = np.argmax(snn_pred, axis=1) 
+#Creamos la matriz de confusión
+snn_cm = confusion_matrix(np.argmax(valid_label, axis=1), snn_predicted)
+
+# Visualizamos la matriz de confusión
+snn_df_cm = pd.DataFrame(snn_cm, range(100), range(100))  
+plt.figure(figsize = (20,14))  
+sn.set(font_scale=1.4) #for label size  
+sn.heatmap(snn_df_cm, annot=True, annot_kws={"size": 12}) # font size  
 plt.show()
