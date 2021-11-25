@@ -1,5 +1,7 @@
 import PIL
 import os
+from os import remove
+from os import path
 import pathlib
 import cv2 as cv
 
@@ -30,18 +32,39 @@ for img_dir in list_img_dir:
 
 files_cant = 0
 labels = []
+cant_img = []
 
 for img_dir in list_img_real_dir:
     print('Directorio:', img_dir)
     files = os.listdir(img_dir)
+    cant_img_dir = 0
     for file in files:
         img = cv.imread(os.path.join(img_dir, file))
         res = cv.resize(img, dsize=(28, 28), interpolation=cv.INTER_CUBIC)
         print('Archivo:', file)
         filename_list = file.split('.')
         
-        final_path = os.path.join(img_dir, filename_list[0]) + '.png'
-        cv.imwrite(final_path, res)
+        if len(filename_list) > 2:
+            second_half = filename_list[0] + '.' + filename_list[1]
+            final_path = os.path.join(img_dir, second_half) + '.png'
+            cv.imwrite(final_path, res)
+            if path.exists(os.path.join(img_dir, second_half) + '.jpg'):
+                remove(os.path.join(img_dir, second_half) + '.jpg')
+                print('Archivo jpg eliminado')
+                print(os.path.join(img_dir, second_half) + '.jpg')
+            elif path.exists(os.path.join(img_dir, second_half) + '.jpeg'):
+                remove(os.path.join(img_dir, second_half) + '.jpeg')
+                print('Archivo jpeg eliminado')
+                print(os.path.join(img_dir, second_half) + '.jpeg')
+        
+        else:
+            final_path = os.path.join(img_dir, filename_list[0]) + '.png'
+            cv.imwrite(final_path, res)
+                
         print('Nuevo archivo escrito con exito!')
         files_cant += 1
+        cant_img_dir += 1
         labels.append(files_cant)
+    cant_img.append(cant_img_dir)
+
+print(cant_img)
