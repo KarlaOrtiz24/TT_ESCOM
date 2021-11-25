@@ -157,7 +157,7 @@ early_stop = EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=
 # # guardamos la red, para reutilizarla en el futuro, sin tener que volver a entrenar
 ABC_model.save("ABECEDARIO.h5py")
 
-abc = ABC_model.fit(train_X, train_label, batch_size=28, epochs=10, verbose=1, validation_data=(valid_X, valid_label), validation_split = 0.30, shuffle=True)
+abc = ABC_model.fit(train_X, train_label, batch_size=28, epochs=15, verbose=1, validation_data=(valid_X, valid_label), validation_split = 0.30, shuffle=True)
 
 plt.figure(0)  
 plt.plot(abc.history['accuracy'],'r')  
