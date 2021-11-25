@@ -155,9 +155,9 @@ early_stop = EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=
 #ABC_train_dropout = ABC_model.fit(train_X, train_label, batch_size=batch_size,epochs=epochs,verbose=1,validation_data=(valid_X, valid_label))
 
 # # guardamos la red, para reutilizarla en el futuro, sin tener que volver a entrenar
-# ABC_model.save("ABECEDARIO.h5py")
+ABC_model.save("ABECEDARIO.h5py")
 
-abc = ABC_model.fit(train_X, train_label, batch_size=128, epochs=15, verbose=1, validation_data=(valid_X, valid_label), validation_split = 0.30, shuffle=True)
+abc = ABC_model.fit(train_X, train_label, batch_size=28, epochs=10, verbose=1, validation_data=(valid_X, valid_label), validation_split = 0.30, shuffle=True)
 
 plt.figure(0)  
 plt.plot(abc.history['accuracy'],'r')  
@@ -186,12 +186,12 @@ snn_predicted = np.argmax(snn_pred, axis=1)
 #Creamos la matriz de confusión
 snn_cm = confusion_matrix(np.argmax(valid_label, axis=1), snn_predicted)
 print("SNN:",snn_cm)
-# Visualizamos la matriz de confusión
-#snn_df_cm = pd.DataFrame(snn_cm, range(100), range(100))  
-#plt.figure(figsize = (20,14))  
-#sn.set(font_scale=1.4) #for label size  
-#sn.heatmap(snn_df_cm, annot=True, annot_kws={"size": 12}) # font size  
-#plt.show()
+ #Visualizamos la matriz de confusión
+snn_df_cm = pd.DataFrame(snn_cm, range(21), range(21))  
+plt.figure(figsize = (20,14))  
+sn.set(font_scale=1.4) #for label size  
+sn.heatmap(snn_df_cm, annot=True, annot_kws={"size": 12}) # font size  
+plt.show()
 
 plt.plot(abc.history['loss'],'c')  
 plt.plot(abc.history['val_loss'],'y')  
