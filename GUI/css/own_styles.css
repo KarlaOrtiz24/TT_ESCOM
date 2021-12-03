@@ -1,0 +1,46 @@
+.font_title{
+    color: #2B21C0;
+    font-size: 6rem;
+    text-align: center;
+    margin-top: 10rem;
+}
+
+.font_primary{
+    color: #6666FF;
+}
+
+.bg_primary_low_opacity{
+    background: rgba(102, 102, 255, 0.6);
+}
+
+.bg_start_img{
+    background: url("../img/scenes/start_scene.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.bg_start_hex{
+    width: fit-content;
+}
+
+.green_student{
+    height: 33rem;
+}
+
+.female_start_student{
+    height: 30rem;
+}
+
+.btn_start{
+    background: #6666FF;
+    color: #f8f9fa;
+    margin-bottom: 10rem;
+    width: 10rem;
+    height: 4rem;
+}
+
+.btn_start:hover{
+    background: #f8f9fa;
+    color: #6666FF;
+}
