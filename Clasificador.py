@@ -44,7 +44,7 @@ with os.scandir(actual_path) as directories:
             list_directorios.append(directory)
             print(directory)
 ##image_dir es la ruta de las carpetas de las imagenes. 
-image_dir = os.path.join(actual_path, list_directorios[3])
+image_dir = os.path.join(actual_path, list_directorios[2])
 ##print("IMAGE DIR", image_dir)
 list_img_dir = [] ##Son las carpetas
 with os.scandir(image_dir) as img_directories:
