@@ -7,8 +7,10 @@
 
 ##Librerias 
 from abc import ABC
-import cv2 #importamos openCV
-import mediapipe as mp #Importamos MediaPipe
+import tkinter as tk
+import cv2 
+from tkinter import filedialog
+
 import numpy as np 
 import cv2 as cv
 import os 
@@ -142,9 +144,9 @@ print(train_X.shape,valid_X.shape,train_label.shape,valid_label.shape)
 ABC_model = Sequential() 
 ABC_model.add(Flatten(input_shape=(28,28,3), name = 'Input_layer'))
 ABC_model.add(Dense(350, activation='relu', name = 'Hidden_layer_1'))
-ABC_model.add(Dropout(0.2))
+#ABC_model.add(Dropout(0.2))
 ABC_model.add(Dense(100, activation='relu', name = 'Hidden_layer_2'))
-ABC_model.add(Dropout(0.3))
+#ABC_model.add(Dropout(0.3))
 ABC_model.add(Dense(21, activation='softmax', name='Output_layer'))
 
 ABC_model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])  
@@ -195,35 +197,16 @@ sn.set(font_scale=1.4) #for label size
 sn.heatmap(snn_df_cm, annot=True, annot_kws={"size": 12}) # font size  
 plt.show()
 
-mp_drawing = mp.solutions.drawing_utils #ayuda a dibujar los 21 puntos y sus conexiones
-mp_hands = mp.solutions.hands #Se emplea solución hands
-cap = cv2.VideoCapture(0, cv2.CAP_DSHOW) #Leemos la camara
-with mp_hands.Hands( #Opciones de Configuracion
-    static_image_mode=False, #False porque no estamos tomando como entrada una imagen
-    max_num_hands=2, #Numero maximo de manos por detectar
-    min_detection_confidence=0.5) as hands: #Valor mínimo de confianza del modelo de detección de manos
-    while True:
-        ret, frame = cap.read()
-        if ret == False:
-            break
-        height, width, _ = frame.shape
-        frame = cv2.flip(frame, 1)
-        frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB) #Se cambia de BGR a RGB ya que las detecciones se hacen con RGB
-        results = hands.process(frame_rgb)  #se obtinenen las detecciones mediante las salidas multi_handedness y multi_hand_landmarks.
-        if results.multi_hand_landmarks is not None: #Se configura que los puntos aparezcan siempre y cuando esten manos enfrente de la camara
-        # Dibujando los puntos y las conexiones mediante mp_drawing
-            for hand_landmarks in results.multi_hand_landmarks:# usamos un for para obtener cada grupo de 21 puntos por cada mano detectada.
-                mp_drawing.draw_landmarks( # dibujamos los puntos y conexiones con ayuda del propio mediaPipe
-                    frame, hand_landmarks, mp_hands.HAND_CONNECTIONS, #se dibujan las conexiones entre los puntos.
-                    mp_drawing.DrawingSpec(color=(0, 255, 255), thickness=3, circle_radius=5), #color, grosor de línea y radio de cada punto
-                    mp_drawing.DrawingSpec(color=(255, 0, 255), thickness=4, circle_radius=5)) #color, grosor de línea y radio de cada conexion
-        cv2.imshow('Frame', frame)
-        if cv2.waitKey(1) & 0xFF == 27:
-            break
-    cap.release()
-    cv2.destroyAllWindows()
 
-imgplot = plt.imshow(train_X[0])  
+
+
+
+root = tk.Tk()
+root.withdraw()
+file_path = filedialog.askopenfilename()
+print('Se abrio imagen')
+imagen = cv2.imread(file_path)
+cv2.namedWindow('imagen_CMA')
 plt.show()  
 print('class for image 1: ' + str(np.argmax(valid_label[0])))  
 print('predicted:         ' + str(snn_predicted[0]))
