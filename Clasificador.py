@@ -186,7 +186,7 @@ snn_predicted = np.argmax(snn_pred, axis=1)
 #Creamos la matriz de confusión
 snn_cm = confusion_matrix(np.argmax(valid_label, axis=1), snn_predicted)
 print("SNN:",snn_cm)
-#Visualizamos la matriz de confusión
+ #Visualizamos la matriz de confusión
 snn_df_cm = pd.DataFrame(snn_cm, range(21), range(21))  
 plt.figure(figsize = (20,14))  
 sn.set(font_scale=1.4) #for label size  
