@@ -7,10 +7,6 @@
 
 ##Librerias 
 from abc import ABC
-import tkinter as tk
-import cv2 
-from tkinter import filedialog
-
 import numpy as np 
 import cv2 as cv
 import os 
@@ -144,9 +140,9 @@ print(train_X.shape,valid_X.shape,train_label.shape,valid_label.shape)
 ABC_model = Sequential() 
 ABC_model.add(Flatten(input_shape=(28,28,3), name = 'Input_layer'))
 ABC_model.add(Dense(350, activation='relu', name = 'Hidden_layer_1'))
-#ABC_model.add(Dropout(0.2))
+ABC_model.add(Dropout(0.2))
 ABC_model.add(Dense(100, activation='relu', name = 'Hidden_layer_2'))
-#ABC_model.add(Dropout(0.3))
+ABC_model.add(Dropout(0.3))
 ABC_model.add(Dense(21, activation='softmax', name='Output_layer'))
 
 ABC_model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])  
@@ -159,7 +155,7 @@ early_stop = EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=
 #ABC_train_dropout = ABC_model.fit(train_X, train_label, batch_size=batch_size,epochs=epochs,verbose=1,validation_data=(valid_X, valid_label))
 
 # # guardamos la red, para reutilizarla en el futuro, sin tener que volver a entrenar
-#ABC_model.save("ABECEDARIO.h5py")
+# ABC_model.save("ABECEDARIO.h5py")
 
 abc = ABC_model.fit(train_X, train_label, batch_size=28, epochs=15, verbose=1, validation_data=(valid_X, valid_label), validation_split = 0.30, shuffle=True)
 
@@ -190,23 +186,24 @@ snn_predicted = np.argmax(snn_pred, axis=1)
 #Creamos la matriz de confusión
 snn_cm = confusion_matrix(np.argmax(valid_label, axis=1), snn_predicted)
 print("SNN:",snn_cm)
- #Visualizamos la matriz de confusión
+#Visualizamos la matriz de confusión
 snn_df_cm = pd.DataFrame(snn_cm, range(21), range(21))  
 plt.figure(figsize = (20,14))  
 sn.set(font_scale=1.4) #for label size  
 sn.heatmap(snn_df_cm, annot=True, annot_kws={"size": 12}) # font size  
 plt.show()
 
+plt.plot(abc.history['loss'],'c')  
+plt.plot(abc.history['val_loss'],'y')  
+# plt.xticks(np.arange(0, 11, 2.0))  
+plt.rcParams['figure.figsize'] = (8, 6)  
+plt.xlabel("Num of Epochs")  
+plt.ylabel("loss")  
+plt.title("Training loss vs Validation loss")  
+plt.legend(['train','validation'])
+plt.show()
 
-
-
-
-root = tk.Tk()
-root.withdraw()
-file_path = filedialog.askopenfilename()
-print('Se abrio imagen')
-imagen = cv2.imread(file_path)
-cv2.namedWindow('imagen_CMA')
+imgplot = plt.imshow(train_X[0])  
 plt.show()  
 print('class for image 1: ' + str(np.argmax(valid_label[0])))  
 print('predicted:         ' + str(snn_predicted[0]))
