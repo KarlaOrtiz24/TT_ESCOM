@@ -25,13 +25,14 @@ from tensorflow.keras import Model
 from tensorflow.keras import optimizers
 from keras.layers import Dense, Dropout, Flatten 
 from keras.layers import Conv2D, MaxPooling2D
-from tensorflow.keras.layers import (BatchNormalization, SeparableConv2D, MaxPooling2D, Activation, Flatten, Dropout, Dense)
+from tensorflow.keras.layers import (
+    BatchNormalization, SeparableConv2D, MaxPooling2D, Activation, Flatten, Dropout, Dense
+)
 from keras.layers.advanced_activations import LeakyReLU
 from sklearn.metrics import confusion_matrix, classification_report
 import pandas as pd 
 import seaborn as sn 
 from sklearn.utils import compute_class_weight
-
 ## Nos situamos en la dirección actual 
 actual_path = pathlib.Path(__file__).parent.absolute()
 print(actual_path)
@@ -42,9 +43,8 @@ with os.scandir(actual_path) as directories:
     for directory in directories:
         if directory.is_dir():
             list_directorios.append(directory)
-            print(directory)
 ##image_dir es la ruta de las carpetas de las imagenes. 
-image_dir = os.path.join(actual_path, list_directorios[3])
+image_dir = os.path.join(actual_path, list_directorios[2])
 ##print("IMAGE DIR", image_dir)
 list_img_dir = [] ##Son las carpetas
 with os.scandir(image_dir) as img_directories:
@@ -106,7 +106,7 @@ print('Lista de clases: ', classes)  #Nos dice las clases
 
 ##Entrenamiento Test validacion 
 
-train_X,test_X,train_Y,test_Y = train_test_split(X, y, test_size=0.2)
+train_X,test_X,train_Y,test_Y = train_test_split(X,y,test_size=0.2)
 print('Aprendizaje:', train_X.shape, train_Y.shape)#80% aprendizaje
 print('Recuperación:', test_X.shape, test_Y.shape)#20% recuperación
 
