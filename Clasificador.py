@@ -193,15 +193,6 @@ sn.set(font_scale=1.4) #for label size
 sn.heatmap(snn_df_cm, annot=True, annot_kws={"size": 12}) # font size  
 plt.show()
 
-plt.plot(abc.history['loss'],'c')  
-plt.plot(abc.history['val_loss'],'y')  
-# plt.xticks(np.arange(0, 11, 2.0))  
-plt.rcParams['figure.figsize'] = (8, 6)  
-plt.xlabel("Num of Epochs")  
-plt.ylabel("loss")  
-plt.title("Training loss vs Validation loss")  
-plt.legend(['train','validation'])
-plt.show()
 
 imgplot = plt.imshow(train_X[0])  
 plt.show()  
