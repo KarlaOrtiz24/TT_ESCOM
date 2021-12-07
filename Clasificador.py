@@ -142,17 +142,17 @@ print(train_X.shape,valid_X.shape,train_label.shape,valid_label.shape)
 
 ABC_model = Sequential() 
 ABC_model.add(Flatten(input_shape=(28,28,3), name = 'Input_layer'))
-ABC_model.add(Dense(1000, activation='sigmoid', name = 'Hidden_layer_1'))
-ABC_model.add(Dropout(0.2))
+ABC_model.add(Dense(1000, activation='relu', name = 'Hidden_layer_1'))
+#ABC_model.add(Dropout(0.2))
 ABC_model.add(Dense(500, activation='sigmoid', name = 'Hidden_layer_2'))
-ABC_model.add(Dropout(0.3))
+#ABC_model.add(Dropout(0.3))
 ABC_model.add(Dense(21, activation='softmax', name='Output_layer'))
 
-ABC_model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy', 'mse'])  
+ABC_model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy', 'mse'])
 ABC_model.summary()
 
-from keras.callbacks import EarlyStopping
-early_stop = EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True)
+#from keras.callbacks import EarlyStopping
+#early_stop = EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True)
 
 ##Guardamos la red 
 #ABC_train_dropout = ABC_model.fit(train_X, train_label, batch_size=batch_size,epochs=epochs,verbose=1,validation_data=(valid_X, valid_label))
@@ -163,7 +163,7 @@ early_stop = EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=
 abc = ABC_model.fit(train_X, train_label, batch_size=32, epochs=10, verbose=1, validation_data=(valid_X, valid_label), shuffle=True)
 puntaje = ABC_model.evaluate(train_X, train_label, verbose=0)
 print('Precision: {:.1f}%'.format(100*puntaje[1]))
-"""plt.figure(0)  
+plt.figure(0)  
 plt.plot(abc.history['accuracy'],'r')  
 plt.plot(abc.history['val_accuracy'],'g')  
 # plt.xticks(np.arange(0, 11, 2.0))  
@@ -202,9 +202,9 @@ plt.show()
 #root.withdraw()
 #file_path = filedialog.askopenfilename()
 #print('Se abrio imagen')
-#imagen = cv2.imread(train_X[0])
+#imagen = cv2.imread(file_path)
 #cv2.namedWindow('imagen_CMA')
 imgplot = plt.imshow(train_X[0])  
 plt.show()  
-#print('class for image 1: ' + str(np.argmax(valid_label[0])))  
-#print('predicted:         ' + str(snn_predicted[0]))"""
+print('class for image 1: ' + str(np.argmax(valid_label[0])))  
+print('predicted:         ' + str(snn_predicted[0]))
