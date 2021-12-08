@@ -14,6 +14,16 @@
     font-weight:400;
 }
 
+.font_secondary{
+    color: #f8f9fa;
+    text-decoration: none;
+}
+
+.font_secondary_bold{
+    color: #f8f9fa;
+    font-weight: bolder;
+}
+
 .spinner_size{
     margin-top: 15rem;
     width: 7rem;
@@ -103,4 +113,24 @@
 .btn_selection:hover{
     background: #f8f9fa;
     color: #6666FF;
+}
+
+.menu_card{
+    background: rgba(102, 102, 255, 0.6);
+    height: 95%;
+}
+
+.menu_shape_btn{
+    background:none;
+    border: none;
+    width: fit-content;
+}
+
+.menu_shape_btn:hover{
+    background: rgba(248, 249, 250, 0.2);
+    border-radius: 5%;
+}
+
+.superior_menucard_row{
+    margin: 7rem 0rem;
 }
