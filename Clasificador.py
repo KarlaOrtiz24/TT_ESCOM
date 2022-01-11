@@ -141,7 +141,7 @@ print(train_X.shape,valid_X.shape,train_label.shape,valid_label.shape)
 ##Construccion de la red 
 
 ABC_model = Sequential() 
-ABC_model.add(Flatten(input_shape=(28,28,3), name = 'Input_layer'))
+ABC_model.add(Flatten(input_shape=(28,28,3), name = 'Input_layer')) #
 ABC_model.add(Dense(1000, activation='relu', name = 'Hidden_layer_1'))
 #ABC_model.add(Dropout(0.2))
 ABC_model.add(Dense(500, activation='sigmoid', name = 'Hidden_layer_2'))
