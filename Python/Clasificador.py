@@ -37,8 +37,7 @@ import pandas as pd
 import seaborn as sn 
 from sklearn.utils import compute_class_weight
 ## Nos situamos en la dirección actual 
-actual_path = pathlib.Path(__file__).parent.absolute()
-print(actual_path)
+actual_path = os.path.join(os.path.dirname(__file__), '..')
 
 list_directorios = [] ##Guarda las lista de directorios
 ##Checa que lo que este, sean carpetas, si son carpetas lo añade a la lista. 
@@ -46,8 +45,11 @@ with os.scandir(actual_path) as directories:
     for directory in directories:
         if directory.is_dir():
             list_directorios.append(directory)
+
 ##image_dir es la ruta de las carpetas de las imagenes. 
 image_dir = os.path.join(actual_path, list_directorios[2])
+print(image_dir)
+
 ##print("IMAGE DIR", image_dir)
 list_img_dir = [] ##Son las carpetas
 with os.scandir(image_dir) as img_directories:
@@ -190,7 +192,7 @@ snn_predicted = np.argmax(snn_pred, axis=1)
 #Creamos la matriz de confusión
 snn_cm = confusion_matrix(np.argmax(valid_label, axis=1), snn_predicted)
 print("SNN:",snn_cm)
- #Visualizamos la matriz de confusión
+#Visualizamos la matriz de confusión
 snn_df_cm = pd.DataFrame(snn_cm, range(21), range(21))  
 plt.figure(figsize = (20,14))  
 sn.set(font_scale=1.4) #for label size  
