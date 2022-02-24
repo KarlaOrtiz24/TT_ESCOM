@@ -20,7 +20,7 @@ def dibujarFlujo(img, flow, step=16): #Dibuja el flujo real
 
     return img_bgr
 
-archivo ='j.mp4'
+archivo =r'C:\Users\Karla\TT_ESCOM\Abecedario\Países Estados\Toluca.mp4'
 def calculoTrayectoriasDensas (archivo):
     cap = cv2.VideoCapture(archivo)                             #Abrimos el video que se analizara
 
@@ -59,3 +59,4 @@ def calculoTrayectoriasDensas (archivo):
 
     cap.release()
     cv2.destroyAllWindows() 
+calculoTrayectoriasDensas(archivo)
