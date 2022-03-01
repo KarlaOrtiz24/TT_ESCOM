@@ -7,4 +7,7 @@
 """
 import os 
 import numpy 
+import pandas as pd
+import csv
 
+archivo = pd.read_csv(r"C:\Users\Karla\TT_ESCOM\Abecedario\Dias\Agosto.csv", delimiter= ",")
