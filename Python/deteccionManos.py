@@ -1,7 +1,9 @@
 import cv2 
 import mediapipe as mp
+from Clasificador import clasificador
 
-def deteccionManos():
+def deteccionManos(neural_network):
+    print('Retorno del clasificador ', neural_network)
     mp_drawing = mp.solutions.drawing_utils         #ayuda a dibujar los 21 puntos y sus conexiones
     mp_hands = mp.solutions.hands                   #Se emplea solución hands
     cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)        #Leemos la camara
@@ -14,9 +16,12 @@ def deteccionManos():
             if ret == False:
                 break
             height, width, _ = frame.shape
+            
+            
             frame = cv2.flip(frame, 1)
             frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB) #Se cambia de BGR a RGB ya que las detecciones se hacen con RGB
             results = hands.process(frame_rgb)  #se obtinenen las detecciones mediante las salidas multi_handedness y multi_hand_landmarks.
+            
             if results.multi_hand_landmarks is not None: #Se configura que los puntos aparezcan siempre y cuando esten manos enfrente de la camara
             # Dibujando los puntos y las conexiones mediante mp_drawing
                 for hand_landmarks in results.multi_hand_landmarks:# usamos un for para obtener cada grupo de 21 puntos por cada mano detectada.
@@ -27,5 +32,8 @@ def deteccionManos():
             cv2.imshow('Frame', frame)
             if cv2.waitKey(1) & 0xFF == 27:
                 break
-        cap.release()
-        cv2.destroyAllWindows()
+    cap.release()
+    cv2.destroyAllWindows()
+
+neural_return = clasificador()
+deteccionManos(neural_return) 
