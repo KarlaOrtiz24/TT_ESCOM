@@ -43,17 +43,16 @@ def calculoTrayectoriasDensas (archivo):
             start = time.time()
 
             flow = cv2.calcOpticalFlowFarneback(prevgray, gray, None, 0.5, 3, 15, 3, 5, 1.2, 0)
-            
             prevgray = gray
-
+            #print(prevgray)
             end = time.time()
             fps = 1 / (end-start)                               #Calculo de los FPS
 
-            print(f"{fps:.2f} FPS")
+            #print(f"{fps:.2f} FPS")
 
-            #cv2.imshow('flow', dibujarFlujo(gray, flow))           #Se muestra el flujo
+            cv2.imshow('flow', dibujarFlujo(gray, flow))           #Se muestra el flujo
 
-            a.append(flow)
+            a.append(prevgray)
         except:
             aux = False
 
