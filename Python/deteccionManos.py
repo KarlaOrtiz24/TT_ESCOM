@@ -1,3 +1,9 @@
+#Detector de manos 
+#Creado el 25/11/2021
+#Sanchez Pizano Irving Daniel 
+#Ortiz Chavez Karla 
+#Macedo Cruz Irvin Yoariht 
+#Piñon Caballero Angel Ramon
 import cv2 
 import mediapipe as mp
 from Clasificador import clasificador

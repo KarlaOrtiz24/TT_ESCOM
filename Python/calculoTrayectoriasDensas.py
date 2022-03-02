@@ -1,3 +1,9 @@
+#Obtencion de frames de videos 
+#Creado el 12/11/2021 
+#Piñon Caballero Angel Ramón 
+#Ortiz Chávez Karla 
+#Macedo Cruz Irvin Yoariht 
+#Sanchez Pizano Irving Daniel 
 import numpy as np
 import cv2
 import csv
