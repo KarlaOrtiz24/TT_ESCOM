@@ -42,7 +42,7 @@ def convertirPng():
         cant_img_dir = 0
         for file in files:
             img = cv.imread(os.path.join(img_dir, file))
-            res = cv.resize(img, dsize=(50, 50), interpolation=cv.INTER_CUBIC)
+            res = cv.resize(img, dsize=(28, 28), interpolation=cv.INTER_CUBIC)
             print('Archivo:', file)
             filename_list = file.split('.')
             

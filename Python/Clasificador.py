@@ -83,7 +83,7 @@ def clasificador():
             img_array = np.asarray(img)
             ##print("IMG ARRAY", img_array)
             #print(len(img_array))
-            # print("IMG", img)
+            #print("IMG", img)
             files_cant += 1
 
     ##Creacion de etiquetas, etiquetado de todos los datos. 
@@ -104,7 +104,7 @@ def clasificador():
         indice=indice+1
 
     y = np.array(labels)
-    X = np.asarray(images) #Se convierten las imagenes a datos numpy 
+    X = np.array(images) #Se convierten las imagenes a datos numpy 
 
     ##print("X", X)
     classes = np.unique(y)
@@ -118,7 +118,7 @@ def clasificador():
     print('Aprendizaje:', train_X.shape, train_Y.shape)#80% aprendizaje
     print('Recuperación:', test_X.shape, test_Y.shape)#20% recuperación
 
-    train_X = train_X.astype(np.float64)
+    train_X = train_X.astype('float32')
     test_X = test_X.astype('float32')
     train_X = train_X/255
     test_X = test_X/255 #Normalizarlo, 0, 1 
