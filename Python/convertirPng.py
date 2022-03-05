@@ -6,7 +6,8 @@ import pathlib
 import cv2 as cv
 
 def convertirPng():
-    actual_path = pathlib.Path(__file__).parent.absolute()
+    actual_path = os.path.join(os.path.dirname(__file__), '..')
+
     print(actual_path)
 
     # directories = os.listdir(actual_path)

@@ -118,7 +118,7 @@ def clasificador():
     print('Aprendizaje:', train_X.shape, train_Y.shape)#80% aprendizaje
     print('Recuperación:', test_X.shape, test_Y.shape)#20% recuperación
 
-    train_X = train_X.astype('float32')
+    train_X = train_X.astype(np.float64)
     test_X = test_X.astype('float32')
     train_X = train_X/255
     test_X = test_X/255 #Normalizarlo, 0, 1 
