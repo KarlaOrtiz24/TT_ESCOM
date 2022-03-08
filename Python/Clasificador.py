@@ -161,10 +161,10 @@ def clasificador():
     #early_stop = EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True)
 
     ##Guardamos la red 
-    #ABC_train_dropout = ABC_model.fit(train_X, train_label, batch_size=batch_size,epochs=epochs,verbose=1,validation_data=(valid_X, valid_label))
+    ABC_train_dropout = ABC_model.fit(train_X, train_label, batch_size=16,epochs=10,verbose=1,validation_data=(valid_X, valid_label))
 
-    # # guardamos la red, para reutilizarla en el futuro, sin tener que volver a entrenar
-    # ABC_model.save("ABECEDARIO.h5py")
+    ## guardamos la red, para reutilizarla en el futuro, sin tener que volver a entrenar
+    ABC_model.save("ABECEDARIO.h5py")
 
     abc = ABC_model.fit(train_X, train_label, batch_size=16, epochs=25, verbose=1, validation_data=(valid_X, valid_label), shuffle=True)
     puntaje = ABC_model.evaluate(train_X, train_label, verbose=0)
