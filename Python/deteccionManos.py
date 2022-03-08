@@ -30,9 +30,9 @@ def deteccionManos():
     cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)        #Leemos la camara
     while(1): 
         ret, frame = cap.read()
-        frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB) #Se cambia de BGR a RGB ya que las detecciones se hacen con RGB
+        color = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB) #Se cambia de BGR a RGB ya que las detecciones se hacen con RGB
         copia = frame.copy()
-        resultado=manos.process(frame_rgb)
+        resultado=manos.process(color)
         posiciones =[]
         if resultado.multi_hand_landmarks: #Se configura que los puntos aparezcan siempre y cuando esten manos enfrente de la camara
             for manos in resultado.multi_hand_landmarks: 
@@ -93,6 +93,71 @@ def deteccionManos():
                        print('Resultado', resultado) 
                        cv2.rectangle(frame, (x1,y1), (x2,y2), (0,255,255),3 )
                        cv2.putText(frame, '{}'.format(direccion[2]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
+                    elif respuesta == 5: 
+                       print('Resultado', resultado) 
+                       cv2.rectangle(frame, (x1,y1), (x2,y2), (0,255,255),3 )
+                       cv2.putText(frame, '{}'.format(direccion[2]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
+                    elif respuesta == 6: 
+                       print('Resultado', resultado) 
+                       cv2.rectangle(frame, (x1,y1), (x2,y2), (0,255,255),3 )
+                       cv2.putText(frame, '{}'.format(direccion[2]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
+                    elif respuesta == 7: 
+                       print('Resultado', resultado) 
+                       cv2.rectangle(frame, (x1,y1), (x2,y2), (0,255,255),3 )
+                       cv2.putText(frame, '{}'.format(direccion[2]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
+                    elif respuesta == 8: 
+                       print('Resultado', resultado) 
+                       cv2.rectangle(frame, (x1,y1), (x2,y2), (0,255,255),3 )
+                       cv2.putText(frame, '{}'.format(direccion[2]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
+                    elif respuesta == 9: 
+                       print('Resultado', resultado) 
+                       cv2.rectangle(frame, (x1,y1), (x2,y2), (0,255,255),3 )
+                       cv2.putText(frame, '{}'.format(direccion[2]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
+                    elif respuesta == 10: 
+                       print('Resultado', resultado) 
+                       cv2.rectangle(frame, (x1,y1), (x2,y2), (0,255,255),3 )
+                       cv2.putText(frame, '{}'.format(direccion[2]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
+                    elif respuesta == 11: 
+                       print('Resultado', resultado) 
+                       cv2.rectangle(frame, (x1,y1), (x2,y2), (0,255,255),3 )
+                       cv2.putText(frame, '{}'.format(direccion[2]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
+                    elif respuesta == 12: 
+                       print('Resultado', resultado) 
+                       cv2.rectangle(frame, (x1,y1), (x2,y2), (0,255,255),3 )
+                       cv2.putText(frame, '{}'.format(direccion[2]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
+                    elif respuesta == 13: 
+                       print('Resultado', resultado) 
+                       cv2.rectangle(frame, (x1,y1), (x2,y2), (0,255,255),3 )
+                       cv2.putText(frame, '{}'.format(direccion[2]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
+                    elif respuesta == 14: 
+                       print('Resultado', resultado) 
+                       cv2.rectangle(frame, (x1,y1), (x2,y2), (0,255,255),3 )
+                       cv2.putText(frame, '{}'.format(direccion[2]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
+                    elif respuesta == 15: 
+                       print('Resultado', resultado) 
+                       cv2.rectangle(frame, (x1,y1), (x2,y2), (0,255,255),3 )
+                       cv2.putText(frame, '{}'.format(direccion[2]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
+                    elif respuesta == 16: 
+                       print('Resultado', resultado) 
+                       cv2.rectangle(frame, (x1,y1), (x2,y2), (0,255,255),3 )
+                       cv2.putText(frame, '{}'.format(direccion[2]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
+                    elif respuesta == 17: 
+                       print('Resultado', resultado) 
+                       cv2.rectangle(frame, (x1,y1), (x2,y2), (0,255,255),3 )
+                       cv2.putText(frame, '{}'.format(direccion[2]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
+                    elif respuesta == 18: 
+                       print('Resultado', resultado) 
+                       cv2.rectangle(frame, (x1,y1), (x2,y2), (0,255,255),3 )
+                       cv2.putText(frame, '{}'.format(direccion[2]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
+                    elif respuesta == 19: 
+                       print('Resultado', resultado) 
+                       cv2.rectangle(frame, (x1,y1), (x2,y2), (0,255,255),3 )
+                       cv2.putText(frame, '{}'.format(direccion[2]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
+                    elif respuesta == 20: 
+                       print('Resultado', resultado) 
+                       cv2.rectangle(frame, (x1,y1), (x2,y2), (0,255,255),3 )
+                       cv2.putText(frame, '{}'.format(direccion[2]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
+                    
                     else: 
                         cv2.putText(frame, 'Letra desconocida', (x1, y1 -5), 1, 1.3, (0,255,255), 1, cv2.LINE_AA)
         cv2.imshow('Video', frame)
@@ -118,7 +183,7 @@ deteccionManos()
             
             
         frame = cv2.flip(frame, 1)
-            results = hands.process(frame_rgb)  #se obtinenen las detecciones mediante las salidas multi_handedness y multi_hand_landmarks.
+            results = hands.process(color)  #se obtinenen las detecciones mediante las salidas multi_handedness y multi_hand_landmarks.
             
             # Dibujando los puntos y las conexiones mediante mp_drawing
                 for hand_landmarks in results.multi_hand_landmarks:# usamos un for para obtener cada grupo de 21 puntos por cada mano detectada.

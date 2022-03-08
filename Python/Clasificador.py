@@ -164,8 +164,8 @@ def clasificador():
     ABC_train_dropout = ABC_model.fit(train_X, train_label, batch_size=16,epochs=10,verbose=1,validation_data=(valid_X, valid_label))
 
     ## guardamos la red, para reutilizarla en el futuro, sin tener que volver a entrenar
-    ABC_model.save("ABECEDARIO.h5")
-
+    ABC_model.save("ABECEDARIO2.h5")
+    
     abc = ABC_model.fit(train_X, train_label, batch_size=16, epochs=25, verbose=1, validation_data=(valid_X, valid_label), shuffle=True)
     puntaje = ABC_model.evaluate(train_X, train_label, verbose=0)
     print('Precision: {:.1f}%'.format(100*puntaje[1]))
