@@ -15,7 +15,7 @@ def grabarVideo(ruta_destino, nombre_video):
     salida = cv.VideoWriter(
         nombre,
         codecs,
-        60.0,
+        30.0,
         (640, 480)
     )
     
@@ -38,6 +38,53 @@ def grabarVideo(ruta_destino, nombre_video):
             salida.write(imagen_volteada)
             if cv.waitKey(1) & 0xFF == ord('q'):
                 break
+    
+    # Se limpian las entradas y salidas y se cierran todas las ventanas
+    captura_camara.release()
+    salida.release()
+    cv.destroyAllWindows()
+    
+
+def copiarVideo(ruta_origen, ruta_destino, nombre_video):
+    # Se coloca la ruta de donde se leerá el video a copiar
+    captura_camara = cv.VideoCapture(ruta_origen)
+    
+    # Formato del video
+    codecs = cv.VideoWriter_fourcc(*'MP4V')
+    
+    nombre = routes.juntarRutas(ruta_destino, nombre_video + '.mp4')
+    
+    # Escritura del video
+    salida = cv.VideoWriter(
+        nombre,
+        codecs,
+        30.0,
+        (640, 480)
+    )
+    
+    # El ciclo se mantendra mientras la camara este abierta
+    while (captura_camara.isOpened()):
+        # Se devuelven dos datos ret es un booleano, 
+        # True cuando se lee la imagen y False si la imagen aun no se lee
+        # Imagen como su nombre lo indica es lo capturado por la camara
+        ret, imagen = captura_camara.read()
+        
+        # Volteamos la imagen verticalmente para que se muestre 
+        # en modo espejo
+        imagen_volteada = cv.flip(imagen, 1)
+        
+        if ret == True:
+            # Se muestra la imagen en una ventana
+            cv.imshow('Video', imagen_volteada)
+            print(imagen.shape)
+            
+            # Se escribe la imagen 
+            salida.write(imagen_volteada)
+            if cv.waitKey(30) & 0xFF == ord('q'):
+                break
+        
+        else:
+            break
     
     # Se limpian las entradas y salidas y se cierran todas las ventanas
     captura_camara.release()
