@@ -23,7 +23,7 @@ direccion= os.listdir(carpeta)
 posiciones =[]
 
 def deteccionManos():
-   # print('Retorno del clasificador ', neural_network)
+    # print('Retorno del clasificador ', neural_network)
     clase_manos = mp.solutions.hands
     mp_drawing = mp.solutions.drawing_utils    ##Dibujo     #ayuda a dibujar los 21 puntos y sus conexiones
     manos = clase_manos.Hands()             ##Manos    #Se emplea solución hands
@@ -157,7 +157,7 @@ def deteccionManos():
                        print('Resultado', resultado) 
                        cv2.rectangle(frame, (x1,y1), (x2,y2), (0,255,255),3 )
                        cv2.putText(frame, '{}'.format(direccion[20]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
-                    
+
                     else: 
                         cv2.putText(frame, 'Letra desconocida', (x1, y1 -5), 1, 1.3, (0,255,255), 1, cv2.LINE_AA)
         cv2.imshow('Video', frame)
