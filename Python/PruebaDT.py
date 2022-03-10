@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 # Get a VideoCapture object from video and store it in vs
-vc = cv2.VideoCapture(r'C:\Users\Karla\TT_ESCOM\Abecedario\paises-estados\Tlaxcala.mp4')
+vc = cv2.VideoCapture(r'C:\Users\Karla\TT_ESCOM\Abecedario\paises-estados\tlaxcala.mp4')
 # Read first frame
 ret, first_frame = vc.read()
 # Scale and resize image
@@ -18,8 +18,6 @@ prev_gray = cv2.cvtColor(first_frame, cv2.COLOR_BGR2GRAY)
 mask = np.zeros_like(first_frame)
 # Sets image saturation to maximum
 mask[..., 1] = 255
-
-
 out = cv2.VideoWriter('Prueba.mp4', -1,1,(600, 600))
 
 while(vc.isOpened()):
@@ -54,7 +52,8 @@ while(vc.isOpened()):
     # Frame are read by intervals of 1 millisecond. The programs breaks out of the while loop when the user presses the 'q' key
     if cv2.waitKey(10) & 0xFF == ord('q'):
         break
-# The following frees up resources and closes all windows
+# The following frees up resources and closes all windows'''
 vc.release()
 
 cv2.destroyAllWindows()
+
