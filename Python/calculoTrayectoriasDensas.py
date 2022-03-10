@@ -26,12 +26,12 @@ def dibujarFlujo(img, flow, step=16): #Dibuja el flujo real
 
     return img_bgr
 
-archivo =r'C:\Users\Karla\TT_ESCOM\Abecedario\Países Estados\Toluca.mp4'
+archivo =r'C:\Users\Karla\TT_ESCOM\Abecedario\paises-estados\Toluca.mp4'
 def calculoTrayectoriasDensas (archivo):
     cap = cv2.VideoCapture(archivo)                             #Abrimos el video que se analizara
 
     suc, prev = cap.read()                                      #Cargamos el primer fotograma
-    prevgray = cv2.cvtColor(prev, cv2.COLOR_BGR2GRAY)           #PGR -> GRAY
+    prevgray = cv2.cvtColor(prev, cv2.COLOR_BGR2GRAY)           
     aux = True
     a = []
 
@@ -43,24 +43,27 @@ def calculoTrayectoriasDensas (archivo):
             start = time.time()
 
             flow = cv2.calcOpticalFlowFarneback(prevgray, gray, None, 0.5, 3, 15, 3, 5, 1.2, 0)
-            prevgray = gray
+            #prevgray = gray
             #print(prevgray)
+            print(flow)
+            flow2 = cv2.cvtColor(flow, cv2.COLOR_BGR2GRAY)
+            print('flow2', flow2)
             end = time.time()
             fps = 1 / (end-start)                               #Calculo de los FPS
 
-            #print(f"{fps:.2f} FPS")
+            print(f"{fps:.2f} FPS")
 
-            cv2.imshow('flow', dibujarFlujo(gray, flow))           #Se muestra el flujo
+            #cv2.imshow('flow', dibujarFlujo(gray, flow))           #Se muestra el flujo
 
             a.append(prevgray)
         except:
             aux = False
 
-    tabla = archivo[:-3] + 'csv'
+    #tabla = archivo[:-3] + 'csv'
         
-    with open(tabla, 'w', newline='', encoding='utf-8') as csvfile:     #Se crea el archivo .csv
-        writer = csv.writer(csvfile)
-        writer.writerows(a)
+    #with open(tabla, 'w', newline='', encoding='utf-8') as csvfile:     #Se crea el archivo .csv
+    #    writer = csv.writer(csvfile)
+    #    writer.writerows(a)
 
     cap.release()
     cv2.destroyAllWindows() 

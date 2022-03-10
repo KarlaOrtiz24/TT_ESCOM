@@ -42,9 +42,9 @@ def deteccionManos():
                     posiciones.append([id, cordenadax, cordenaday])
                     mp_drawing.draw_landmarks(frame, manos, clase_manos.HAND_CONNECTIONS)
                 if len(posiciones)!=0: 
-                    punto1= posiciones[3] 
-                    punto2 = posiciones[20] #Aun no estoy segura
-                    punto3 = posiciones[9] #Lo mismo
+                    punto1= posiciones[3] #A
+                    punto2 = posiciones[20] #B
+                    punto3 = posiciones[9] #C
                     punto4 = posiciones[17] #D
                     punto5 = posiciones[17] #E
                     punto6 = posiciones[19] #F
@@ -64,7 +64,7 @@ def deteccionManos():
                     punto20 = posiciones[19] #W
                     punto21 = posiciones[13]#Y
                     x1, y1 = (punto18[1]-100, punto18[2]-100)
-                    ancho, alto = (x1 +28),(y1 + 28)
+                    ancho, alto = (x1 +200),(y1 + 200)
                     x2, y2 = x1 +ancho, y1 + alto 
                     dedos_reg = copia[y1:y2, x1:x2]
                     dedos_reg = cv2.resize(dedos_reg, (28,28), interpolation=cv2.INTER_CUBIC)
@@ -88,75 +88,75 @@ def deteccionManos():
                     elif respuesta == 3: 
                         print('Resultado', resultado) 
                         cv2.rectangle(frame, (x1,y1), (x2,y2), (255,0,255),3 )
-                        cv2.putText(frame, '{}'.format(direccion[2]), (x1,y1-5), 1, 1.3,(255,0,255), 1, cv2.LINE_AA)
+                        cv2.putText(frame, '{}'.format(direccion[3]), (x1,y1-5), 1, 1.3,(255,0,255), 1, cv2.LINE_AA)
                     elif respuesta == 4: 
                        print('Resultado', resultado) 
                        cv2.rectangle(frame, (x1,y1), (x2,y2), (0,255,255),3 )
-                       cv2.putText(frame, '{}'.format(direccion[2]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
+                       cv2.putText(frame, '{}'.format(direccion[4]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
                     elif respuesta == 5: 
                        print('Resultado', resultado) 
                        cv2.rectangle(frame, (x1,y1), (x2,y2), (0,255,255),3 )
-                       cv2.putText(frame, '{}'.format(direccion[2]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
+                       cv2.putText(frame, '{}'.format(direccion[5]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
                     elif respuesta == 6: 
                        print('Resultado', resultado) 
                        cv2.rectangle(frame, (x1,y1), (x2,y2), (0,255,255),3 )
-                       cv2.putText(frame, '{}'.format(direccion[2]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
+                       cv2.putText(frame, '{}'.format(direccion[6]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
                     elif respuesta == 7: 
                        print('Resultado', resultado) 
                        cv2.rectangle(frame, (x1,y1), (x2,y2), (0,255,255),3 )
-                       cv2.putText(frame, '{}'.format(direccion[2]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
+                       cv2.putText(frame, '{}'.format(direccion[7]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
                     elif respuesta == 8: 
                        print('Resultado', resultado) 
                        cv2.rectangle(frame, (x1,y1), (x2,y2), (0,255,255),3 )
-                       cv2.putText(frame, '{}'.format(direccion[2]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
+                       cv2.putText(frame, '{}'.format(direccion[8]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
                     elif respuesta == 9: 
                        print('Resultado', resultado) 
                        cv2.rectangle(frame, (x1,y1), (x2,y2), (0,255,255),3 )
-                       cv2.putText(frame, '{}'.format(direccion[2]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
+                       cv2.putText(frame, '{}'.format(direccion[9]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
                     elif respuesta == 10: 
                        print('Resultado', resultado) 
                        cv2.rectangle(frame, (x1,y1), (x2,y2), (0,255,255),3 )
-                       cv2.putText(frame, '{}'.format(direccion[2]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
+                       cv2.putText(frame, '{}'.format(direccion[10]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
                     elif respuesta == 11: 
                        print('Resultado', resultado) 
                        cv2.rectangle(frame, (x1,y1), (x2,y2), (0,255,255),3 )
-                       cv2.putText(frame, '{}'.format(direccion[2]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
+                       cv2.putText(frame, '{}'.format(direccion[11]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
                     elif respuesta == 12: 
                        print('Resultado', resultado) 
                        cv2.rectangle(frame, (x1,y1), (x2,y2), (0,255,255),3 )
-                       cv2.putText(frame, '{}'.format(direccion[2]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
+                       cv2.putText(frame, '{}'.format(direccion[12]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
                     elif respuesta == 13: 
                        print('Resultado', resultado) 
                        cv2.rectangle(frame, (x1,y1), (x2,y2), (0,255,255),3 )
-                       cv2.putText(frame, '{}'.format(direccion[2]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
+                       cv2.putText(frame, '{}'.format(direccion[13]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
                     elif respuesta == 14: 
                        print('Resultado', resultado) 
                        cv2.rectangle(frame, (x1,y1), (x2,y2), (0,255,255),3 )
-                       cv2.putText(frame, '{}'.format(direccion[2]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
+                       cv2.putText(frame, '{}'.format(direccion[14]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
                     elif respuesta == 15: 
                        print('Resultado', resultado) 
                        cv2.rectangle(frame, (x1,y1), (x2,y2), (0,255,255),3 )
-                       cv2.putText(frame, '{}'.format(direccion[2]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
+                       cv2.putText(frame, '{}'.format(direccion[15]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
                     elif respuesta == 16: 
                        print('Resultado', resultado) 
                        cv2.rectangle(frame, (x1,y1), (x2,y2), (0,255,255),3 )
-                       cv2.putText(frame, '{}'.format(direccion[2]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
+                       cv2.putText(frame, '{}'.format(direccion[16]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
                     elif respuesta == 17: 
                        print('Resultado', resultado) 
                        cv2.rectangle(frame, (x1,y1), (x2,y2), (0,255,255),3 )
-                       cv2.putText(frame, '{}'.format(direccion[2]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
+                       cv2.putText(frame, '{}'.format(direccion[17]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
                     elif respuesta == 18: 
                        print('Resultado', resultado) 
                        cv2.rectangle(frame, (x1,y1), (x2,y2), (0,255,255),3 )
-                       cv2.putText(frame, '{}'.format(direccion[2]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
+                       cv2.putText(frame, '{}'.format(direccion[18]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
                     elif respuesta == 19: 
                        print('Resultado', resultado) 
                        cv2.rectangle(frame, (x1,y1), (x2,y2), (0,255,255),3 )
-                       cv2.putText(frame, '{}'.format(direccion[2]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
+                       cv2.putText(frame, '{}'.format(direccion[19]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
                     elif respuesta == 20: 
                        print('Resultado', resultado) 
                        cv2.rectangle(frame, (x1,y1), (x2,y2), (0,255,255),3 )
-                       cv2.putText(frame, '{}'.format(direccion[2]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
+                       cv2.putText(frame, '{}'.format(direccion[20]), (x1,y1-5), 1, 1.3,(0,255,255), 1, cv2.LINE_AA)
                     
                     else: 
                         cv2.putText(frame, 'Letra desconocida', (x1, y1 -5), 1, 1.3, (0,255,255), 1, cv2.LINE_AA)
