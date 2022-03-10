@@ -1,8 +1,13 @@
 import cv2
 import numpy as np
+import Routes.Routes as routes
 
 # Get a VideoCapture object from video and store it in vs
-vc = cv2.VideoCapture(r'C:\Users\Karla\TT_ESCOM\Abecedario\paises-estados\Tlaxcala.mp4')
+ruta_padre_video = routes.juntarConPadre(__file__, 'Abecedario')
+ruta_video = routes.juntarRutas(ruta_padre_video, 'paises-estados')
+ruta_video_real = routes.juntarRutas(ruta_video, 'Tlaxcala.mp4')
+
+vc = cv2.VideoCapture(ruta_video_real)
 # Read first frame
 ret, first_frame = vc.read()
 # Scale and resize image
