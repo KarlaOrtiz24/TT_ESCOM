@@ -10,5 +10,8 @@ ruta_origen = routes.juntarRutas(ruta_origen, 'Abecedario')
 ruta_origen = routes.juntarRutas(ruta_origen, 'paises-estados')
 ruta_origen = routes.juntarRutas(ruta_origen, 'tlaxcala.mp4')
 
+ruta_origen1 = routes.juntarRutas(ruta_destino, nombre_video1)
+
 # Video.grabarVideo(ruta_destino, nombre_video)
 Video.copiarVideo(ruta_origen, ruta_destino, nombre_video1)
+Video.abrirVideo(ruta_origen1)
