@@ -3,7 +3,7 @@ import Routes.Routes as routes
 
 ruta_destino = routes.juntarConPadre(__file__, 'VideosPrueba')
 nombre_video = 'Prueba'
-nombre_video1 = 'Video_Copia'
+nombre_video1 = 'Video_Copia1'
 
 ruta_origen = routes.juntarConPadre(__file__, '..')
 ruta_origen = routes.juntarRutas(ruta_origen, 'Abecedario')
@@ -14,4 +14,4 @@ ruta_origen1 = routes.juntarRutas(ruta_destino, nombre_video1)
 
 # Video.grabarVideo(ruta_destino, nombre_video)
 Video.copiarVideo(ruta_origen, ruta_destino, nombre_video1)
-Video.abrirVideo(ruta_origen1)
+# Video.abrirVideo(ruta_origen1)
