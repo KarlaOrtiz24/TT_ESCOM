@@ -8,18 +8,20 @@ import cv2
 import numpy as np
 import tensorflow as tf
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from keras.models import load_model
 import os
 import pyttsx3
 #engine = pyttsx3.init()
 
 
 # load saved model from PC
-model = tf.keras.models.load_model(r'C:\Users\Karla\TT_ESCOM\ABECEDARIO.h5')
+model = load_model(r'C:\Users\Karla\TT_ESCOM\ABECEDARIO_2.h5')
 model.summary()
 data_dir = 'Aprendizaje_Abecedario'
 #getting the labels form data directory
 labels = sorted(os.listdir(data_dir))
-labels[-1] = 'Nothing'
+print('labels', labels)
+#labels[-1] = 'Nothing'
 print(labels)
 
 #initiating the video source, 0 for internal camera
@@ -27,6 +29,7 @@ cap = cv2.VideoCapture(0)
 while(True):
     
     _ , frame = cap.read()
+    
     cv2.rectangle(frame, (100, 100), (300, 300), (0, 0, 255), 5) 
     #region of intrest
     roi = frame[100:300, 100:300]
@@ -46,7 +49,7 @@ while(True):
 
     # Initialize the engine 
     engine = pyttsx3.init() 
-    engine.say(predicted_char) 
+    #engine.say(predicted_char) 
     engine.runAndWait()
 
     font = cv2.FONT_HERSHEY_TRIPLEX

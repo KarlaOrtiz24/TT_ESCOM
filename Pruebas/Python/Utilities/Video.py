@@ -1,3 +1,5 @@
+
+
 import cv2 as cv 
 import Routes.Routes as routes
 import time
@@ -45,7 +47,7 @@ def grabarVideo(ruta_destino, nombre_video):
             if cv.waitKey(1) & 0xFF == ord('q'):
                 break
             
-            time.sleep(delay)
+            #time.sleep(delay)
     
     # Se limpian las entradas y salidas y se cierran todas las ventanas
     captura_camara.release()

@@ -5,8 +5,9 @@ import Routes.Routes as routes
 # Get a VideoCapture object from video and store it in vs
 ruta_padre_video = routes.juntarConPadre(__file__, 'Abecedario')
 ruta_video = routes.juntarRutas(ruta_padre_video, 'paises-estados')
-ruta_video_real = routes.juntarRutas(ruta_video, 'Tlaxcala.mp4')
-
+ruta_video_real = routes.juntarRutas(ruta_video, 'tlaxcala.mp4')
+codec=cv2.VideoWriter_fourcc(*'mp4v')
+fps=cv2.ruta_video
 vc = cv2.VideoCapture(ruta_video_real)
 # Read first frame
 ret, first_frame = vc.read()
@@ -23,7 +24,7 @@ prev_gray = cv2.cvtColor(first_frame, cv2.COLOR_BGR2GRAY)
 mask = np.zeros_like(first_frame)
 # Sets image saturation to maximum
 mask[..., 1] = 255
-out = cv2.VideoWriter('Prueba.mp4', -1,1,(600, 600))
+out = cv2.VideoWriter('Prueba.mp4', codec ,1,(600, 600))
 
 while(vc.isOpened()):
     # Read a frame from video
@@ -55,7 +56,7 @@ while(vc.isOpened()):
     # Update previous frame
     prev_gray = gray
     # Frame are read by intervals of 1 millisecond. The programs breaks out of the while loop when the user presses the 'q' key
-    if cv2.waitKey(10) & 0xFF == ord('q'):
+    if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 # The following frees up resources and closes all windows'''
 vc.release()
