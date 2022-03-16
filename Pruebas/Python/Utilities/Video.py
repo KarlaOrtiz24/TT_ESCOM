@@ -98,7 +98,8 @@ def copiarVideo(ruta_origen, ruta_destino, nombre_video):
             redimension = escala/dimension_maxima
             
             img_real = cv.resize(imagen, None, fx = redimension, fy = redimension)
-            
+            prev_gray = cv.cvtColor(img_real, cv.COLOR_BGR2GRAY)
+
             # Se escribe la imagen 
             salida.write(imagen_volteada)
             

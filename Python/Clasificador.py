@@ -146,7 +146,7 @@ def clasificador():
     ##Construccion de la red 
 
     ABC_model = Sequential() 
-    ABC_model.add(Flatten(input_shape=(28,28,3), name = 'Input_layer')) #
+    ABC_model.add(Flatten(input_shape=(60,60,3), name = 'Input_layer')) #
     ABC_model.add(Dense(1000, activation='relu', name = 'Hidden_layer_1'))
     ABC_model.add(Dense(500, activation='relu', name = 'Hidden_layer_2'))
     #ABC_model.add(Dropout(0.2))
