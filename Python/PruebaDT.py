@@ -7,7 +7,6 @@ ruta_padre_video = routes.juntarConPadre(__file__, 'Abecedario')
 ruta_video = routes.juntarRutas(ruta_padre_video, 'paises-estados')
 ruta_video_real = routes.juntarRutas(ruta_video, 'tlaxcala.mp4')
 codec=cv2.VideoWriter_fourcc(*'mp4v')
-fps=cv2.ruta_video
 vc = cv2.VideoCapture(ruta_video_real)
 # Read first frame
 ret, first_frame = vc.read()
@@ -18,7 +17,6 @@ scale = resize_dim/max_dim
 first_frame = cv2.resize(first_frame, None, fx=scale, fy=scale)
 # Convert to gray scale 
 prev_gray = cv2.cvtColor(first_frame, cv2.COLOR_BGR2GRAY)
-
 
 # Create mask
 mask = np.zeros_like(first_frame)
