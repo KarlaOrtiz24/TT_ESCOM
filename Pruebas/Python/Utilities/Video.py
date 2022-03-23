@@ -188,6 +188,7 @@ def dtVideo(ruta_origen, ruta_destino, nombre_video):
             
             # Se muestra la imagen en una ventana
             cv.imshow('Video', img_real_flujo)
+            print(img_real_flujo)
             
             # Se reasigna la imagen actual como una imagen previa a nuestro siguiente frame
             primera_imagen_gris = imagen_gris

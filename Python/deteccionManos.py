@@ -32,15 +32,15 @@ while(True):
     
     cv2.rectangle(frame, (100, 100), (300, 300), (0, 0, 255), 5) 
     #region of intrest
-    roi = frame[100:300, 100:300]
-    img = cv2.resize(roi, (28, 28))
+    roi = frame[50:300, 50:300]
+    img = cv2.resize(roi, (60, 60))
     cv2.imshow('roi', roi)
     
 
     img = img/255
 
     #make predication about the current frame
-    prediction = model.predict(img.reshape(1,28,28,3))
+    prediction = model.predict(img.reshape(1,60,60,3))
     char_index = np.argmax(prediction)
     #print(char_index,prediction[0,char_index]*100)
 
