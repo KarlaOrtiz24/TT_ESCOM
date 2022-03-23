@@ -117,7 +117,7 @@ def copiarVideo(ruta_origen, ruta_destino, nombre_video):
     
 # ==================================================================================================
 
-def dtVideo(ruta_origen, ruta_destino, nombre_video):
+def dtVideoJson(ruta_origen, ruta_destino, nombre_video):
     # Se coloca la ruta de donde se leerá el video a copiar
     captura_camara = cv.VideoCapture(ruta_origen)
     
@@ -152,12 +152,16 @@ def dtVideo(ruta_origen, ruta_destino, nombre_video):
         (ancho, alto)
     )
     
+    cantidad_frames = 0
+    
     # El ciclo se mantendra mientras la camara este abierta
     while (captura_camara.isOpened()):
         # Se devuelven dos datos ret es un booleano, 
         # True cuando se lee la imagen y False si la imagen aun no se lee
         # Imagen como su nombre lo indica es lo capturado por la camara
         ret, imagen = captura_camara.read()
+        
+        cantidad_frames += 1
         
         # Volteamos la imagen verticalmente para que se muestre 
         # en modo espejo
@@ -185,10 +189,10 @@ def dtVideo(ruta_origen, ruta_destino, nombre_video):
             
             # Se escribe la imagen 
             salida.write(flujo_denso)
+            print(flujo_denso)
             
             # Se muestra la imagen en una ventana
-            cv.imshow('Video', img_real_flujo)
-            print(img_real_flujo)
+            cv.imshow('Video', cv.cvtColor(img_real_flujo, cv.COLOR_BGR2RGB))
             
             # Se reasigna la imagen actual como una imagen previa a nuestro siguiente frame
             primera_imagen_gris = imagen_gris
@@ -203,3 +207,5 @@ def dtVideo(ruta_origen, ruta_destino, nombre_video):
     captura_camara.release()
     salida.release()
     cv.destroyAllWindows()
+    
+    return cantidad_frames
