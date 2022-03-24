@@ -126,7 +126,9 @@ def dtVideoJson(ruta_origen, ruta_destino, nombre_video):
     
     # Dimensiones de la imagen capturada por el video
     ancho = int(captura_camara.get(cv.CAP_PROP_FRAME_WIDTH))
+    # print('ancho', ancho)
     alto = int(captura_camara.get(cv.CAP_PROP_FRAME_HEIGHT))
+    # print('alto', alto)
     
     # Se captura la imagen por primera vez
     ret, primera_imagen = captura_camara.read()
@@ -144,6 +146,8 @@ def dtVideoJson(ruta_origen, ruta_destino, nombre_video):
     # Nombre del video 
     nombre = routes.juntarRutas(ruta_destino, nombre_video + '.mp4')
     
+    nombre_rgb = routes.juntarRutas(ruta_destino, nombre_video + '_rgb.mp4')
+    
     # Escritura del video
     salida = cv.VideoWriter(
         nombre,
@@ -152,7 +156,16 @@ def dtVideoJson(ruta_origen, ruta_destino, nombre_video):
         (ancho, alto)
     )
     
+    salida1 = cv.VideoWriter(
+        nombre_rgb,
+        codecs,
+        fps,
+        (ancho, alto)
+    )
+    
     cantidad_frames = 0
+    diccionario_bgr = {}
+    diccionario_rgb = {}
     
     # El ciclo se mantendra mientras la camara este abierta
     while (captura_camara.isOpened()):
@@ -160,9 +173,7 @@ def dtVideoJson(ruta_origen, ruta_destino, nombre_video):
         # True cuando se lee la imagen y False si la imagen aun no se lee
         # Imagen como su nombre lo indica es lo capturado por la camara
         ret, imagen = captura_camara.read()
-        
-        cantidad_frames += 1
-        
+                
         # Volteamos la imagen verticalmente para que se muestre 
         # en modo espejo
         imagen_volteada = cv.flip(imagen, 1)
@@ -180,22 +191,30 @@ def dtVideoJson(ruta_origen, ruta_destino, nombre_video):
             mascara[..., 0] = angulo * 180 / np.pi / 2
             mascara[..., 2] = cv.normalize(magnitud, None, 0, 255, cv.NORM_MINMAX)
             imagen_rgb = cv.cvtColor(mascara, cv.COLOR_HSV2BGR)
-            flujo_denso = cv.addWeighted(imagen, 1, imagen_rgb, 2, 0)
+            flujo_denso = cv.addWeighted(imagen, 1, imagen_rgb, 3.5, 0)
+            flujo_denso_rgb = cv.cvtColor(flujo_denso, cv.COLOR_BGR2RGB)
             
             # Imagen redimensionada que se mostrará como salida en la ventana
             img_real = cv.resize(imagen, None, fx = redimension, fy = redimension)
             img_real_gris = cv.cvtColor(img_real, cv.COLOR_BGR2GRAY)
             img_real_flujo = cv.resize(flujo_denso, None, fx = redimension, fy = redimension)
+            img_real_flujo_rgb = cv.cvtColor(img_real_flujo, cv.COLOR_BGR2RGB)
             
             # Se escribe la imagen 
             salida.write(flujo_denso)
-            print(flujo_denso)
+            salida1.write(flujo_denso_rgb)
             
             # Se muestra la imagen en una ventana
-            cv.imshow('Video', cv.cvtColor(img_real_flujo, cv.COLOR_BGR2RGB))
+            cv.imshow('Video BGR', img_real_flujo)
+            cv.imshow('Video RGB', img_real_flujo_rgb)
             
             # Se reasigna la imagen actual como una imagen previa a nuestro siguiente frame
             primera_imagen_gris = imagen_gris
+            
+            cantidad_frames += 1
+            id_dato = 'frame_' + str(cantidad_frames)
+            diccionario_bgr[id_dato] = flujo_denso
+            diccionario_rgb[id_dato] = flujo_denso_rgb
             
             if cv.waitKey(1) & 0xFF == ord('q'):
                 break
@@ -208,4 +227,4 @@ def dtVideoJson(ruta_origen, ruta_destino, nombre_video):
     salida.release()
     cv.destroyAllWindows()
     
-    return cantidad_frames
+    return diccionario_bgr, diccionario_rgb
