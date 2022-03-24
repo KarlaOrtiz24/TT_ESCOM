@@ -147,10 +147,12 @@ def clasificador():
 
     ABC_model = Sequential() 
     ABC_model.add(Flatten(input_shape=(60,60,3), name = 'Input_layer')) #
-    ABC_model.add(Dense(100, activation='relu', name = 'Hidden_layer_1'))
-    ABC_model.add(Dense(500, activation='relu', name = 'Hidden_layer_2'))
+    ABC_model.add(Dense(350, activation='relu', name = 'Hidden_layer_1'))
     #ABC_model.add(Dropout(0.2))
-    ABC_model.add(Dense(1000, activation='relu', name = 'Hidden_layer_3'))
+
+    ABC_model.add(Dense(100, activation='relu', name = 'Hidden_layer_2'))
+    #ABC_model.add(Dropout(0.2))
+    #ABC_model.add(Dense(1000, activation='relu', name = 'Hidden_layer_3'))
     #ABC_model.add(Dropout(0.3))
     ABC_model.add(Dense(21, activation='softmax', name='Output_layer'))
 
@@ -166,10 +168,10 @@ def clasificador():
     ## guardamos la red, para reutilizarla en el futuro, sin tener que volver a entrenar
     ABC_model.save("ABECEDARIO2.h5")
     
-    abc = ABC_model.fit(train_X, train_label, batch_size=32, epochs=20, verbose=1, validation_data=(valid_X, valid_label), shuffle=True)
+    abc = ABC_model.fit(train_X, train_label, batch_size=16, epochs=20, verbose=1, validation_data=(valid_X, valid_label), shuffle=True)
     puntaje = ABC_model.evaluate(train_X, train_label, verbose=0)
     print('Precision: {:.1f}%'.format(100*puntaje[1]))
-    print(puntaje)
+    #print(puntaje)
     '''plt.figure(0)  
     plt.plot(abc.history['accuracy'],'r')  
     plt.plot(abc.history['val_accuracy'],'g')  

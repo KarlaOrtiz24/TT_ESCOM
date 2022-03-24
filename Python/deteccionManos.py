@@ -15,14 +15,14 @@ import pyttsx3
 
 
 # load saved model from PC
-model = load_model(r'C:\Users\Karla\TT_ESCOM\ABECEDARIO_2.h5')
+model = load_model(r'C:\Users\Karla\TT_ESCOM\ABECEDARIO2.h5')
 model.summary()
 data_dir = 'Aprendizaje_Abecedario'
 #getting the labels form data directory
 labels = sorted(os.listdir(data_dir))
 print('labels', labels)
 #labels[-1] = 'Nothing'
-print(labels)
+#print(labels)
 
 #initiating the video source, 0 for internal camera
 cap = cv2.VideoCapture(0)
