@@ -21,15 +21,37 @@ bgr, rgb = Video.dtVideoJson(ruta_origen, ruta_destino, nombre_video2)
 bgr4json = {}
 rgb4json = {}
 
-for frame in bgr:
-    bgr4json[frame] = bgr[frame].tolist()
+num_frames = 0
+fil = 0
+col = 0
 
-for frame in rgb:
-    rgb4json[frame] = rgb[frame].tolist()
+lista = []
+
+for frame in bgr.values():
+    num_frames += 1
+    nombre_frame = 'frame_' + str(num_frames)
+
+    bgr4json.setdefault(nombre_frame, {})
     
+    for fila in range(len(frame)):
+        nombre_fila = 'fila_' + str(fila)
+        
+        bgr4json[nombre_frame].setdefault(nombre_fila, {})
 
-print(bgr4json)
-print(rgb4json)
+        for columna in range(len(frame[fila])):
+            nombre_col = 'columna_' + str(columna)
+            # print(nombre_frame, nombre_fila, nombre_col)
+            
+            bgr_valores = dict(zip('bgr', frame[fila][columna].tolist()))
+            # print(bgr_valores)
+            
+            bgr4json[nombre_frame][nombre_fila].setdefault(nombre_col, bgr_valores)
 
-# json.dumps(bgr)
-# json.dumps(rgb)
+
+# print(bgr4json)
+# print(rgb4json)
+
+with open('tlaxcala.json', 'w') as json_file:
+    json.dump(bgr4json, json_file)
+
+# json.dumps(rgb) 
