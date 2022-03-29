@@ -145,19 +145,19 @@ def clasificador():
 
     ##Construccion de la red 
 
-    ABC_model = Sequential() 
-    ABC_model.add(Flatten(input_shape=(60,60,3), name = 'Input_layer')) #
-    ABC_model.add(Dense(1000, activation='relu', name = 'Hidden_layer_1'))
+    #ABC_model = Sequential() 
+    #ABC_model.add(Flatten(input_shape=(60,60,3), name = 'Input_layer')) #
+    #ABC_model.add(Dense(1000, activation='relu', name = 'Hidden_layer_1'))
     #ABC_model.add(Dropout(0.2))
 
-    ABC_model.add(Dense(800, activation='relu', name = 'Hidden_layer_2'))
+    #ABC_model.add(Dense(800, activation='relu', name = 'Hidden_layer_2'))
     #ABC_model.add(Dropout(0.2))
     #ABC_model.add(Dense(500, activation='relu', name = 'Hidden_layer_3'))
     #ABC_model.add(Dropout(0.3))
-    ABC_model.add(Dense(21, activation='softmax', name='Output_layer'))
+    #ABC_model.add(Dense(21, activation='softmax', name='Output_layer'))
 
-    ABC_model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy', 'mse'])
-    ABC_model.summary()
+    #ABC_model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy', 'mse'])
+    #ABC_model.summary()
 
     #from keras.callbacks import EarlyStopping
     #early_stop = EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True)
@@ -166,12 +166,52 @@ def clasificador():
    # ABC_train_dropout = ABC_model.fit(train_X, train_label, batch_size=32,epochs=20,verbose=1,validation_data=(valid_X, valid_label))
 
     ## guardamos la red, para reutilizarla en el futuro, sin tener que volver a entrenar
-    ABC_model.save("ABECEDARIO2.h5")
+    #ABC_model.save("ABECEDARIO2.h5")
     
-    abc = ABC_model.fit(train_X, train_label, batch_size=16, epochs=10, verbose=1, validation_data=(valid_X, valid_label), shuffle=True)
+    #abc = ABC_model.fit(train_X, train_label, batch_size=16, epochs=10, verbose=1, validation_data=(valid_X, valid_label), shuffle=True)
+    #puntaje = ABC_model.evaluate(train_X, train_label, verbose=0)
+    #print('Precision: {:.1f}%'.format(100*puntaje[1]))
+    #print(puntaje)
+
+
+    INIT_LR = 1e-3
+    epochs = 20
+    batch_size = 32
+
+    ABC_model = Sequential()
+    ABC_model.add(Conv2D(4, kernel_size=(3, 3),activation='relu',padding='same',input_shape=(60,60,3)))
+    ABC_model.add(LeakyReLU(alpha=0.01))
+    ABC_model.add(MaxPooling2D((2, 2),padding='same'))
+    #ABC_model.add(Dropout(0.5))
+
+    ABC_model.add(Flatten())
+    ABC_model.add(Dense(500, activation='relu'))
+    ABC_model.add(LeakyReLU(alpha=0.01))
+    #ABC_model.add(Dense(500, activation='relu'))
+    #ABC_model.add(Dropout(0.5)) 
+    ABC_model.add(Dense(21, activation='softmax'))
+
+    ABC_model.summary()
+    ABC_model.compile(loss=keras.losses.categorical_crossentropy, optimizer = tensorflow.keras.optimizers.Adam(learning_rate=INIT_LR, decay=INIT_LR / 100), metrics=['accuracy'])
+
+##Guardamos la red 
+
+    ABC_train_dropout = ABC_model.fit(train_X, train_label, batch_size=batch_size,epochs=epochs,verbose=1,validation_data=(valid_X, valid_label))
+
+# guardamos la red, para reutilizarla en el futuro, sin tener que volver a entrenar
+    ABC_model.save("ABECEDARIO.h5")
+
+
+##Test 
+    test_eval = ABC_model.evaluate(test_X, test_Y_one_hot, verbose=1)
     puntaje = ABC_model.evaluate(train_X, train_label, verbose=0)
     print('Precision: {:.1f}%'.format(100*puntaje[1]))
-    #print(puntaje)
+    print(puntaje)
+    print('Test loss:', test_eval[0])
+    print('Test accuracy:', test_eval[1])
+
+
+
     '''plt.figure(0)  
     plt.plot(abc.history['accuracy'],'r')  
     plt.plot(abc.history['val_accuracy'],'g')  

@@ -15,7 +15,7 @@ import pyttsx3
 
 
 # load saved model from PC
-model = load_model(r'C:\Users\Karla\TT_ESCOM\ABECEDARIO2.h5')
+model = load_model(r'C:\Users\Karla\TT_ESCOM\ABECEDARIO.h5')
 model.summary()
 data_dir = 'Aprendizaje_Abecedario'
 #getting the labels form data directory
