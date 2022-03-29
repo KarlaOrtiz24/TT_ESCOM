@@ -144,7 +144,7 @@ def dtVideoJson(ruta_origen, ruta_destino, nombre_video):
     fps = captura_camara.get(cv.CAP_PROP_FPS)
     
     # Nombre del video 
-    nombre = routes.juntarRutas(ruta_destino, nombre_video + '.mp4')
+    nombre = routes.juntarRutas(ruta_destino, nombre_video + '_bgr.mp4')
     
     nombre_rgb = routes.juntarRutas(ruta_destino, nombre_video + '_rgb.mp4')
     
