@@ -52,6 +52,9 @@ for archivo in archivos_ruta_origen:
         # for pixel in pixeles:
         #     print(pixel)
         
+        print('ESCRITURA DE ' + extension[0] + '_bgr.csv INICIADA' )
+        
+        
         with open(ruta_dataframe_bgr, 'w', newline='') as File:
             writer = csv.writer(File)
             writer.writerows(pixeles)
