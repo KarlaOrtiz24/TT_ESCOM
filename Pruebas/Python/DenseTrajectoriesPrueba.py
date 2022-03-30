@@ -27,20 +27,19 @@ for archivo in archivos_ruta_origen:
         frames = 0
         
         for frame in bgr.values():
-            pixeles.clear()
             nombre_frame = 'frame_' + str(frames)
             
             for fila in range(len(frame)):
-                nombre_fila = 'fila_' + str(fila)
+                # nombre_fila = 'fila_' + str(fila)
                 
                 for columna in range(len(frame[fila])):
                     
-                    nombre_columna = 'columna_' + str(columna)
+                    # nombre_columna = 'columna_' + str(columna)
                     
                     pixel.clear()
                     pixel.append(nombre_frame)
-                    pixel.append(nombre_fila)
-                    pixel.append(nombre_columna)
+                    # pixel.append(nombre_fila)
+                    # pixel.append(nombre_columna)
                     
                     for dato in range(len(frame[fila][columna])):
                         pixel.append(int(frame[fila][columna][dato]))
@@ -50,13 +49,17 @@ for archivo in archivos_ruta_origen:
                     
             frames += 1
         
-        # print(pixeles)
+        # for pixel in pixeles:
+        #     print(pixel)
+        
+        print('ESCRITURA DE ' + extension[0] + '_bgr.csv INICIADA' )
+        
         
         with open(ruta_dataframe_bgr, 'w', newline='') as File:
             writer = csv.writer(File)
             writer.writerows(pixeles)
         
-        print('ESCRIUTA DE ' + extension[0] + '_bgr.csv COMPLETADA' )
+        print('ESCRITURA DE ' + extension[0] + '_bgr.csv COMPLETADA' )
         
     else:
         continue
