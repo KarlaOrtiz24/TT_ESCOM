@@ -20,10 +20,6 @@ for archivo in archivos_ruta_origen:
         bgr, rgb = Video.dtVideoJson(ruta_video, ruta_destino, extension[0])
         
         pixeles = []
-        pixel = []
-        
-        info_video = []
-        
         frames = 0
         
         for frame in bgr.values():
@@ -34,30 +30,17 @@ for archivo in archivos_ruta_origen:
                 
                 for columna in range(len(frame[fila])):
                     
-                    # nombre_columna = 'columna_' + str(columna)
+                    pixeles.clear()
+                    for pixel in range(len(frame[fila][columna])):
+                        pixeles.append(frame[fila][columna][pixel])
+                        
+                    pixeles.insert(0, nombre_frame)
                     
-                    pixel.clear()
-                    pixel.append(nombre_frame)
-                    # pixel.append(nombre_fila)
-                    # pixel.append(nombre_columna)
                     
-                    for dato in range(len(frame[fila][columna])):
-                        pixel.append(int(frame[fila][columna][dato]))
-                    
-                    # print(pixel)
-                    pixeles.append(pixel)
-                    
+                    with open(ruta_dataframe_bgr, 'a', newline='', encoding='utf-8') as archivo:
+                        write = csv.writer(archivo)
+                        write.writerow(pixeles)
             frames += 1
-        
-        # for pixel in pixeles:
-        #     print(pixel)
-        
-        print('ESCRITURA DE ' + extension[0] + '_bgr.csv INICIADA' )
-        
-        
-        with open(ruta_dataframe_bgr, 'w', newline='') as File:
-            writer = csv.writer(File)
-            writer.writerows(pixeles)
         
         print('ESCRITURA DE ' + extension[0] + '_bgr.csv COMPLETADA' )
         
