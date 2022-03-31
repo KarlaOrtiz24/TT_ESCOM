@@ -199,7 +199,7 @@ def clasificador():
     ABC_train_dropout = ABC_model.fit(train_X, train_label, batch_size=batch_size,epochs=epochs,verbose=1,validation_data=(valid_X, valid_label))
 
 # guardamos la red, para reutilizarla en el futuro, sin tener que volver a entrenar
-    ABC_model.save("ABECEDARIO.h5")
+    ABC_model.save("Convolucional.h5")
 
 
 ##Test 
@@ -212,9 +212,9 @@ def clasificador():
 
 
 
-    '''plt.figure(0)  
-    plt.plot(abc.history['accuracy'],'r')  
-    plt.plot(abc.history['val_accuracy'],'g')  
+    plt.figure(0)  
+    plt.plot(ABC_train_dropout.history['accuracy'],'r')  
+    plt.plot(ABC_train_dropout.history['val_accuracy'],'g')  
     plt.xticks(np.arange(0, 11, 2.0))  
     plt.rcParams['figure.figsize'] = (8, 6)  
     plt.xlabel("Num of Epochs")  
@@ -223,8 +223,8 @@ def clasificador():
     plt.legend(['train','validation'])
 
     plt.figure(1)  
-    plt.plot(abc.history['loss'],'r')  
-    plt.plot(abc.history['val_loss'],'g')  
+    plt.plot(ABC_train_dropout.history['loss'],'r')  
+    plt.plot(ABC_train_dropout.history['val_loss'],'g')  
     plt.xticks(np.arange(0, 11, 2.0))  
     plt.rcParams['figure.figsize'] = (8, 6)  
     plt.xlabel("Num of Epochs")  
@@ -263,6 +263,6 @@ def clasificador():
     print('class for image 1: ' + str(np.argmax(valid_label[0])))  
     print('predicted:         ' + str(snn_predicted[0]))
 
-    return ABC_model'''
+    return ABC_model
 
 clasificador()
