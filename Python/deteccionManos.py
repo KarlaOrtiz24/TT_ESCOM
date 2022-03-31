@@ -20,6 +20,7 @@ from spacy import displacy
 model = load_model(r'C:\Users\Karla\TT_ESCOM\ABECEDARIO.h5')
 model.summary()
 data_dir = r'C:\Users\Karla\TT_ESCOM\Aprendizaje_Abecedario'
+print(data_dir)
 #getting the labels form data directory
 labels = (os.listdir(data_dir))
 print('labels', labels)
@@ -42,15 +43,16 @@ while(True):
     
 
     img = img/255
-
     #make predication about the current frame
     prediction = model.predict(img.reshape(1,60,60,3))
+    #print(prediction)
     char_index = np.argmax(prediction)
+    print("Char", char_index)
     #print(char_index,prediction[0,char_index]*100)
 
     confidence = round(prediction[0,char_index]*100, 1)
     predicted_char = labels[char_index]
-
+    print("PC",predicted_char)
     # Initialize the engine 
     engine = pyttsx3.init() 
     #engine.say(predicted_char) 
