@@ -15,7 +15,7 @@ def mediapipe_detection(image, model):
     image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR) # COLOR COVERSION RGB 2 BGR
     return image, results
 def draw_landmarks(image, results):
-    mp_drawing.draw_landmarks(image, results.face_landmarks, mp_holistic.FACE_CONNECTIONS) # Draw face connections
+    mp_drawing.draw_landmarks(image, results.face_landmarks, mp_holistic.FACEMESH_TESSELATION) # Draw face connections
     mp_drawing.draw_landmarks(image, results.pose_landmarks, mp_holistic.POSE_CONNECTIONS) # Draw pose connections
     mp_drawing.draw_landmarks(image, results.left_hand_landmarks, mp_holistic.HAND_CONNECTIONS) # Draw left hand connections
     mp_drawing.draw_landmarks(image, results.right_hand_landmarks, mp_holistic.HAND_CONNECTIONS) # Draw right hand connections
@@ -66,7 +66,7 @@ with mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=
 draw_landmarks(frame, results)
 plt.imshow(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)) 
 
-len(results.left_hand_landmarks.landmark)
+#len(results.left_hand_landmarks.landmark)
 pose = []
 for res in results.pose_landmarks.landmark:
     test = np.array([res.x, res.y, res.z, res.visibility])
@@ -92,3 +92,83 @@ result_test
 
 np.save('0', result_test)
 np.load('0.npy')
+
+
+# Path for exported data, numpy arrays
+DATA_PATH = os.path.join('Aprendizaje_Dinamico_ActionDetection') 
+
+# Actions that we try to detect
+actions = np.array(['Abril', 'Adios', 'Agosto', 'Ahi', 'Ahora', 'Alegre', 'Alla', 'Amigo', 'Amiga', 'Amistad', 'Amor', 'Año', 
+            'Arriba', 'Ayer', 'Bien', 'Buenas Noches', 'Buenas tardes', 'Bueno', 'Buenos dias', 'Compromiso', 'Convivencia',
+            'Cultura', 'Dia', 'Diciembre', 'Domingo', 'El', 'Ella', 'Ellos', 'Ellas', 'En', 'Enero', 'Enojado', 'Entre', 'Esa, ese, eso',
+            'Escribir', 'Estar', 'Estudiar', 'Familia', 'Febrero', 'Femenino', 'Hablar', 'Honestidad', 'J', 'Jueves', 'Jugar', 'Julio', 
+            'Junio', 'Justicia', 'K', 'Ll', 'Lunes', 'Martes', 'Marzo', 'Mayo', 'Mes', 'Miercoles', 'Nosotros', 'Noviembre'
+            'Ñ', 'Octubre', 'Platicar', 'Por', 'Proteger', 'Q', 'Respeto', 'Responsabilidad', 'Rr','Sabado', 'Semana', 'Septiembre', 
+            'Solidaridad', 'Tolerancia', 'Tú', 'Ustedes', 'Valores', 'Viernes', 'X', 'Yo', 'Z'])
+
+# Thirty videos worth of data
+no_sequences = 30
+
+# Videos are going to be 30 frames in length
+sequence_length = 30
+
+# Folder start
+start_folder = 30
+for action in actions: 
+    dirmax = np.max(np.array(os.listdir(os.path.join(DATA_PATH, action))).astype(int))
+    for sequence in range(1,no_sequences+1):
+        try: 
+            os.makedirs(os.path.join(DATA_PATH, action, str(dirmax+sequence)))
+        except:
+            pass
+
+
+cap = cv2.VideoCapture(0)
+# Set mediapipe model 
+with mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=0.5) as holistic:
+    
+    # NEW LOOP
+    # Loop through actions
+    for action in actions:
+        # Loop through sequences aka videos
+        for sequence in range(start_folder, start_folder+no_sequences):
+            # Loop through video length aka sequence length
+            for frame_num in range(sequence_length):
+
+                # Read feed
+                ret, frame = cap.read()
+
+                # Make detections
+                image, results = mediapipe_detection(frame, holistic)
+
+                # Draw landmarks
+                draw_styled_landmarks(image, results)
+                
+                # NEW Apply wait logic
+                if frame_num == 0: 
+                    cv2.putText(image, 'STARTING COLLECTION', (120,200), 
+                               cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255, 0), 4, cv2.LINE_AA)
+                    cv2.putText(image, 'Collecting frames for {} Video Number {}'.format(action, sequence), (15,12), 
+                               cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 1, cv2.LINE_AA)
+                    # Show to screen
+                    cv2.imshow('OpenCV Feed', image)
+                    cv2.waitKey(500)
+                else: 
+                    cv2.putText(image, 'Collecting frames for {} Video Number {}'.format(action, sequence), (15,12), 
+                               cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 1, cv2.LINE_AA)
+                    # Show to screen
+                    cv2.imshow('OpenCV Feed', image)
+                
+                # NEW Export keypoints
+                keypoints = extract_keypoints(results)
+                npy_path = os.path.join(DATA_PATH, action, str(sequence), str(frame_num))
+                np.save(npy_path, keypoints)
+
+                # Break gracefully
+                if cv2.waitKey(10) & 0xFF == 27:
+                    break
+                    
+    cap.release()
+    cv2.destroyAllWindows()
+cap.release()
+cv2.destroyAllWindows()
