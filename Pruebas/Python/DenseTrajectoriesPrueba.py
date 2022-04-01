@@ -10,7 +10,7 @@ ruta_origen = routes.juntarRutas(ruta_origen, 'Aprendizaje_Dinamico')
 
 archivos_ruta_origen = routes.getArchivosCarpeta(ruta_origen)
 
-for archivo in archivos_ruta_origen:
+for archivo in archivos_ruta_origen[0:39]:
     extension = archivo.split('.')
     
     if extension[1] == 'mp4':
