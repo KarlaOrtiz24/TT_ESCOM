@@ -95,12 +95,13 @@ np.load('0.npy')
 
 
 # Path for exported data, numpy arrays
-DATA_PATH = os.path.join('Aprendizaje_Dinamico_ActionDetection') 
+
+DATA_PATH = os.path.join(r'C:\Users\Karla\TT_ESCOM\Aprendizaje_Dinamico_AD') 
 
 # Actions that we try to detect
-actions = np.array(['Abril', 'Adios', 'Agosto', 'Ahi', 'Ahora', 'Alegre', 'Alla', 'Amigo', 'Amiga', 'Amistad', 'Amor', 'Año', 
+actions = np.array(['Abril', 'Adios', 'Agosto', 'Ahi', 'Ahora', 'Alegre', 'Alla', 'Amiga', 'Amigo', 'Amistad', 'Amor', 'Año', 
             'Arriba', 'Ayer', 'Bien', 'Buenas Noches', 'Buenas tardes', 'Bueno', 'Buenos dias', 'Compromiso', 'Convivencia',
-            'Cultura', 'Dia', 'Diciembre', 'Domingo', 'El', 'Ella', 'Ellos', 'Ellas', 'En', 'Enero', 'Enojado', 'Entre', 'Esa, ese, eso',
+            'Cultura', 'Dia', 'Diciembre', 'Domingo', 'Él', 'Ella', 'Ellos', 'Ellas', 'En', 'Enero', 'Enojado', 'Entre', 'Esa, ese, eso',
             'Escribir', 'Estar', 'Estudiar', 'Familia', 'Febrero', 'Femenino', 'Hablar', 'Honestidad', 'J', 'Jueves', 'Jugar', 'Julio', 
             'Junio', 'Justicia', 'K', 'Ll', 'Lunes', 'Martes', 'Marzo', 'Mayo', 'Mes', 'Miercoles', 'Nosotros', 'Noviembre'
             'Ñ', 'Octubre', 'Platicar', 'Por', 'Proteger', 'Q', 'Respeto', 'Responsabilidad', 'Rr','Sabado', 'Semana', 'Septiembre', 
