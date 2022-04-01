@@ -16,47 +16,44 @@ from spacy import displacy
 #engine = pyttsx3.init()
 
 
-# load saved model from PC
+#Cargamos el modelo ya guardado
 model = load_model(r'C:\Users\Karla\TT_ESCOM\ABECEDARIO.h5')
 model.summary()
+#Cargamos la direccion de los datos
 data_dir = r'C:\Users\Karla\TT_ESCOM\Aprendizaje_Abecedario'
 print(data_dir)
-#getting the labels form data directory
+#Obtenemos las etiquetas de la carpeta
 labels = (os.listdir(data_dir))
-print('labels', labels)
-#labels[1] = 'Nothing'
+#labels[-1] = 'Nothing'
+
 #print(labels)
 
-#initiating the video source, 0 for internal camera
+#Inicializamos la captura de video
 cap = cv2.VideoCapture(0)
 
 
 while(True):
     
-    _ , frame = cap.read()
+    ret, frame = cap.read()
     
     cv2.rectangle(frame, (100, 100), (300, 300), (0, 0, 255), 5) 
     #region of intrest
-    roi = frame[50:300, 50:300]
+    roi = frame[100:300, 100:300]
     img = cv2.resize(roi, (60, 60))
     cv2.imshow('roi', roi)
     
 
-    img = img/255
+    img2 = img/255
+    print('img', img)
     #make predication about the current frame
-    prediction = model.predict(img.reshape(1,60,60,3))
+    prediction = model.predict(img2.reshape(1,60,60,3))
     #print(prediction)
     char_index = np.argmax(prediction)
-    print("Char", char_index)
     #print(char_index,prediction[0,char_index]*100)
 
     confidence = round(prediction[0,char_index]*100, 1)
     predicted_char = labels[char_index]
-    print("PC",predicted_char)
-    # Initialize the engine 
-    engine = pyttsx3.init() 
-    #engine.say(predicted_char) 
-    engine.runAndWait()
+  
 
     font = cv2.FONT_HERSHEY_TRIPLEX
     fontScale = 1

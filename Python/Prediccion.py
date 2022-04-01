@@ -20,7 +20,8 @@ from spacy import displacy
 modelo = 'C:/Users/Karla/TT_ESCOM/ABECEDARIO.h5'
 cnn = load_model(modelo)
 
-direccion = 'C:/Users/Karla/TT_ESCOM/Aprendizaje_Abecedario'
+direccion = r'C:/Users/Karla/TT_ESCOM/Aprendizaje_Abecedario'
+print('Direccion',direccion)
 dir_img =os.listdir(direccion)
 print('Nombres', dir_img)
 aux = 0
@@ -65,10 +66,10 @@ while (1):
                 ancho, alto = (x1 + 100), (y1 + 300)
                 x2, y2 = x1 + ancho, y1 + alto
                 dedos_reg = copia[y1:y2, x1:x2]
-                dedos_reg = cv2.resize(dedos_reg, (60, 60), interpolation=cv2.INTER_AREA)
+                dedos_reg = cv2.resize(dedos_reg, (100, 100))
                 x = img_to_array(dedos_reg)  # Convertir la imagen a una matriz
                 x = np.expand_dims(x, axis=0)  # Se agrega un nuevo eje
-                vector = cnn.predict(x)  # Va ser un arreglo de 2 dimensiones
+                vector = cnn.predict(x)  # Va a ser un arreglo de 2 dimensiones
                 resultado = vector[0]
                 respuesta = np.argmax(resultado)  # Entrega el indice del valor más alto 0 | 1
                 if respuesta == 0:
