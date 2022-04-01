@@ -17,7 +17,7 @@ from spacy import displacy
 
 
 #Cargamos el modelo ya guardado
-model = load_model(r'C:\Users\Karla\TT_ESCOM\ABECEDARIO.h5')
+model = load_model(r'C:\Users\Karla\TT_ESCOM\Convolucional.h5')
 model.summary()
 #Cargamos la direccion de los datos
 data_dir = r'C:\Users\Karla\TT_ESCOM\Aprendizaje_Abecedario'
@@ -44,7 +44,7 @@ while(True):
     
 
     img2 = img/255
-    print('img', img)
+    #print('img', img)
     #make predication about the current frame
     prediction = model.predict(img2.reshape(1,60,60,3))
     #print(prediction)
