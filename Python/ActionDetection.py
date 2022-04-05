@@ -114,14 +114,14 @@ no_sequences = 30
 sequence_length = 30
 
 # Folder start
-start_folder = 30
+start_folder = 1
 for action in actions: 
     for sequence in range(no_sequences):
         try: 
             os.makedirs(os.path.join(DATA_PATH, action, str(sequence)))
         except:
             pass
-        
+
 
 
 cap = cv2.VideoCapture(0)
