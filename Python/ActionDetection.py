@@ -114,7 +114,7 @@ no_sequences = 30
 sequence_length = 30
 
 # Folder start
-start_folder = 1
+start_folder = 0
 for action in actions: 
     for sequence in range(no_sequences):
         try: 
