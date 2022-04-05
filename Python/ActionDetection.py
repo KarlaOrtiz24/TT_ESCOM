@@ -1,9 +1,14 @@
+#04/04/2022
+#Karla Ortiz Chavez 
+#TT_Escom, Obtención de videos en npy para clasificador de detección de acciones
 import cv2
 import numpy as np
 import os
 from matplotlib import pyplot as plt
 import time
 import mediapipe as mp
+from sklearn.model_selection import train_test_split
+from tensorflow.keras.utils import to_categorical
 
 mp_holistic = mp.solutions.holistic # Holistic model
 mp_drawing = mp.solutions.drawing_utils # Drawing utilities
@@ -128,6 +133,7 @@ cap = cv2.VideoCapture(0)
 # Set mediapipe model 
 with mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=0.5) as holistic:
     
+
     # NEW LOOP
     # Loop through actions
     for action in actions:
@@ -173,3 +179,23 @@ with mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=
     cv2.destroyAllWindows()
 cap.release()
 cv2.destroyAllWindows()
+
+label_map = {label:num for num, label in enumerate(actions)}
+label_map
+sequences, labels = [], []
+for action in actions:
+    for sequence in range(no_sequences):
+        window = []
+        for frame_num in range(sequence_length):
+            res = np.load(os.path.join(DATA_PATH, action, str(sequence), "{}.npy".format(frame_num)))
+            window.append(res)
+        sequences.append(window)
+        labels.append(label_map[action])
+np.array(sequences).shape
+np.array(labels).shape
+X = np.array(sequences)
+X.shape
+y = to_categorical(labels).astype(int)
+y
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.05)
+y_test.shape
