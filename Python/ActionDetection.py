@@ -117,17 +117,18 @@ np.load('0.npy')
 
 # Direccion donde serán guardados los puntos obtenidos de cada palabra
 
-DATA_PATH = os.path.join(r'C:\Users\Karla\TT_ESCOM\Aprendizaje_Dinamico_AD') 
+DATA_PATH = os.path.join(r'C:\Users\Karla\TT_ESCOM\Aprendizaje_1to1') 
 
 # Acciones que guardaremos
-actions = np.array(['Abril', 'Adios', 'Agosto', 'Ahi', 'Ahora', 'Alegre', 'Alla', 'Amiga', 'Amigo', 'Amistad', 'Amor', 'Año', 
+actions = np.array(['Buenos dias', 'Compromiso', 'Convivencia'])
+'''Ahi', 'Ahora', 'Alegre', 'Alla', 'Amiga', 'Amigo', 'Amistad', 'Amor', 'Año', 
             'Arriba', 'Ayer', 'Bien', 'Buenas Noches', 'Buenas tardes', 'Bueno', 'Buenos dias', 'Compromiso', 'Convivencia',
             'Cultura', 'Dia', 'Diciembre', 'Domingo', 'Él', 'Ella', 'Ellos', 'Ellas', 'En', 'Enero', 'Enojado', 'Entre', 'Esa, ese, eso',
             'Escribir', 'Estar', 'Estudiar', 'Familia', 'Febrero', 'Femenino', 'Hablar', 'Honestidad', 'J', 'Jueves', 'Jugar', 'Julio', 
             'Junio', 'Justicia', 'K', 'Ll', 'Lunes', 'Martes', 'Marzo', 'Mayo', 'Mes', 'Miercoles', 'Nosotros', 'Noviembre'
             'Ñ', 'Octubre', 'Platicar', 'Por', 'Proteger', 'Q', 'Respeto', 'Responsabilidad', 'Rr','Sabado', 'Semana', 'Septiembre', 
             'Solidaridad', 'Tolerancia', 'Tú', 'Ustedes', 'Valores', 'Viernes', 'X', 'Yo', 'Z'])
-
+'''
 # Treinta videos por valor de datos, ejemplo: 30 videos correspondientes a Abril, en un futuro... Dataset
 no_sequences = 30
 
