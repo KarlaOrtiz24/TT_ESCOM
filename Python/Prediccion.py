@@ -6,6 +6,7 @@ from keras_preprocessing.image import load_img, img_to_array
 from keras.models import load_model
 import spacy
 from spacy import displacy
+import Routes.Routes as routes
 
 #model = load_model(r'C:\Users\Karla\TT_ESCOM\ABECEDARIO.h5')
 #model.summary()
@@ -17,10 +18,12 @@ from spacy import displacy
 #print(labels)
 # Lectura de la camara
 
-modelo = 'C:/Users/Karla/TT_ESCOM/Convolucional.h5'
+modelo = routes.juntarConPadre(__file__, 'Convolucional.h5')
+# modelo = 'C:/Users/Karla/TT_ESCOM/Convolucional.h5'
 cnn = load_model(modelo)
 
-direccion = r'C:/Users/Karla/TT_ESCOM/Aprendizaje_Abecedario'
+# direccion = r'C:/Users/Karla/TT_ESCOM/Aprendizaje_Abecedario'
+direccion = routes.juntarConPadre(__file__, 'Aprendizaje_Abecedario')
 print('Direccion',direccion)
 dir_img =os.listdir(direccion)
 print('Nombres', dir_img)

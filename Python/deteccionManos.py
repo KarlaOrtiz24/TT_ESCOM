@@ -13,14 +13,18 @@ import os
 import pyttsx3
 import spacy 
 from spacy import displacy
+import Routes.Routes as routes 
 #engine = pyttsx3.init()
 
 
 #Cargamos el modelo ya guardado
-model = load_model(r'C:\Users\Karla\TT_ESCOM\Convolucional.h5')
+# model = load_model(r'C:\Users\Karla\TT_ESCOM\Convolucional.h5')
+model_dir = routes.juntarConPadre(__file__, 'Convolucional.h5')
+model = load_model(model_dir)
 model.summary()
 #Cargamos la direccion de los datos
-data_dir = r'C:\Users\Karla\TT_ESCOM\Aprendizaje_Abecedario'
+# data_dir = r'C:\Users\Karla\TT_ESCOM\Aprendizaje_Abecedario'
+data_dir = routes.juntarConPadre(__file__, 'Aprendizaje_Abecedario')
 print(data_dir)
 #Obtenemos las etiquetas de la carpeta
 labels = (os.listdir(data_dir))
@@ -53,7 +57,6 @@ while(True):
 
     confidence = round(prediction[0,char_index]*100, 1)
     predicted_char = labels[char_index]
-  
 
     font = cv2.FONT_HERSHEY_TRIPLEX
     fontScale = 1
