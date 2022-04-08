@@ -36,7 +36,12 @@ cap = cv2.VideoCapture(0)
 
 # Creacion de objeto para la deteccion y el seguimiento de las manos
 clase_manos = mp.solutions.hands
-manos = clase_manos.Hands()
+manos = clase_manos.Hands(
+    static_image_mode = False,
+    max_num_hands = 2,
+    min_detection_confidence = 0.5,
+    min_tracking_confidence = 0.5
+)
 
 # Dibujo de las manos
 dibujo = mp.solutions.drawing_utils
@@ -162,7 +167,7 @@ while (1):
             else:
                 cv2.putText(frame, 'LETRA_DESCONOCIDA', (x1, y1 - 5), 1, 1.3, (0, 255, 255), 1, cv2.LINE_AA)
 
-    cv2.imshow("Proyecto Final", frame)
+    cv2.imshow("Proyecto Final", cv2.flip(frame, 1))
     k = cv2.waitKey(1)
     if k == 27:
         break
