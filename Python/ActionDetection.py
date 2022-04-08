@@ -120,7 +120,7 @@ np.load('0.npy')
 DATA_PATH = os.path.join(r'C:\Users\Karla\TT_ESCOM\Aprendizaje_1to1') 
 
 # Acciones que guardaremos
-actions = np.array(['Buenos dias', 'Compromiso', 'Convivencia'])
+actions = np.array(['Domingo', 'Él', 'Ella'])
 '''Ahi', 'Ahora', 'Alegre', 'Alla', 'Amiga', 'Amigo', 'Amistad', 'Amor', 'Año', 
             'Arriba', 'Ayer', 'Bien', 'Buenas Noches', 'Buenas tardes', 'Bueno', 'Buenos dias', 'Compromiso', 'Convivencia',
             'Cultura', 'Dia', 'Diciembre', 'Domingo', 'Él', 'Ella', 'Ellos', 'Ellas', 'En', 'Enero', 'Enojado', 'Entre', 'Esa, ese, eso',
@@ -194,11 +194,10 @@ with mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=
                     
     cap.release()
     cv2.destroyAllWindows()
-cap.release()
-cv2.destroyAllWindows()
+
 
 ##Iniciando etiquetado de datos
-
+''''
 label_map = {label:num for num, label in enumerate(actions)}
 label_map
 sequences, labels = [], []
@@ -217,4 +216,4 @@ X.shape
 y = to_categorical(labels).astype(int)
 y
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.05)
-y_test.shape
+y_test.shape'''
