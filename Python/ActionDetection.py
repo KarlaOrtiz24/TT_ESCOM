@@ -120,7 +120,7 @@ np.load('0.npy')
 DATA_PATH = os.path.join(r'C:\Users\Karla\TT_ESCOM\Aprendizaje_1to1') 
 
 # Acciones que guardaremos
-actions = np.array(['Domingo', 'Él', 'Ella'])
+actions = np.array(['J', 'Jueves', 'Jugar'])
 '''Ahi', 'Ahora', 'Alegre', 'Alla', 'Amiga', 'Amigo', 'Amistad', 'Amor', 'Año', 
             'Arriba', 'Ayer', 'Bien', 'Buenas Noches', 'Buenas tardes', 'Bueno', 'Buenos dias', 'Compromiso', 'Convivencia',
             'Cultura', 'Dia', 'Diciembre', 'Domingo', 'Él', 'Ella', 'Ellos', 'Ellas', 'En', 'Enero', 'Enojado', 'Entre', 'Esa, ese, eso',
@@ -130,10 +130,10 @@ actions = np.array(['Domingo', 'Él', 'Ella'])
             'Solidaridad', 'Tolerancia', 'Tú', 'Ustedes', 'Valores', 'Viernes', 'X', 'Yo', 'Z'])
 '''
 # Treinta videos por valor de datos, ejemplo: 30 videos correspondientes a Abril, en un futuro... Dataset
-no_sequences = 30
+no_sequences = 20
 
 # Los videos tendran una secuencia de 30 frames
-sequence_length = 30
+sequence_length = 20
 
 # Se comienza por el folder 0. 0 a 29
 start_folder = 0
