@@ -120,7 +120,7 @@ np.load('0.npy')
 DATA_PATH = os.path.join(r'C:\Users\Karla\TT_ESCOM\Aprendizaje_1to1') 
 
 # Acciones que guardaremos
-actions = np.array(['Durante', 'Hacia', 'Hasta'])
+actions = np.array(['Profesor'])
 '''Ahi', 'Ahora', 'Alegre', 'Alla', 'Amiga', 'Amigo', 'Amistad', 'Amor', 'Año', 
             'Arriba', 'Ayer', 'Bien', 'Buenas Noches', 'Buenas tardes', 'Bueno', 'Buenos dias', 'Compromiso', 'Convivencia',
             'Cultura', 'Dia', 'Diciembre', 'Domingo', 'Él', 'Ella', 'Ellos', 'Ellas', 'En', 'Enero', 'Enojado', 'Entre', 'Esa, ese, eso',
