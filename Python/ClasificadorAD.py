@@ -31,13 +31,16 @@ from tensorflow.keras.layers import (
     BatchNormalization, SeparableConv2D, MaxPooling2D, Activation, Flatten, Dropout, Dense
 )
 from keras.layers.advanced_activations import LeakyReLU
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import LSTM, Dense
+from tensorflow.keras.callbacks import TensorBoard
 from sklearn.metrics import confusion_matrix, classification_report
 import pandas as pd 
 import seaborn as sn 
 from sklearn.utils import compute_class_weight
 
 
-def clasificador():
+def clasificadorAD():
     ## Nos situamos en la dirección actual 
     actual_path = os.path.join(os.path.dirname(__file__), '..')
 
@@ -110,3 +113,38 @@ def clasificador():
     nClasses = len(classes)
     print('Total de clases : ', nClasses) #imprime el total de las clases, clases 21
     print('Lista de clases: ', classes)  #Nos dice las clases
+
+    train_X,test_X,train_Y,test_Y = train_test_split(X,y,test_size=0.2)
+    print('Aprendizaje:', train_X.shape, train_Y.shape)#80% aprendizaje
+    print('Recuperación:', test_X.shape, test_Y.shape)#20% recuperación
+
+    train_X = train_X.astype('float32')
+    test_X = test_X.astype('float32')
+    train_X = train_X/255
+    test_X = test_X/255 #Normalizarlo, 0, 1 
+
+    train_Y_one_hot = to_categorical(train_Y)
+    test_Y_one_hot  = to_categorical(test_Y)
+
+    print('Etiqueta original: ', train_Y[0])
+    print('Despues de la conversion: ', train_Y_one_hot[0]) #A(1, 0,0,0,0,0,0,0,0,0)
+
+    train_X, valid_X, train_label, valid_label = train_test_split(train_X, train_Y_one_hot, test_size = 0.2, random_state = 4)
+
+    # el método shape da la cantidad de datos que contiene un arreglo
+    print(train_X.shape,valid_X.shape,train_label.shape,valid_label.shape)
+
+
+    log_dir = os.path.join('Logs')
+    tb_callback = TensorBoard(log_dir=log_dir)
+    model = Sequential()
+    model.add(LSTM(64, return_sequences=True, activation='relu', input_shape=(30,1662)))
+    model.add(LSTM(128, return_sequences=True, activation='relu'))
+    model.add(LSTM(64, return_sequences=False, activation='relu'))
+    model.add(Dense(64, activation='relu'))
+    model.add(Dense(32, activation='relu'))
+    model.add(Dense(100, activation='softmax'))
+    model.compile(optimizer='Adam', loss='categorical_crossentropy', metrics=['categorical_accuracy'])
+    model.fit(train_X, test_X, epochs=2000, callbacks=[tb_callback])
+    model.summary()
+clasificadorAD()
