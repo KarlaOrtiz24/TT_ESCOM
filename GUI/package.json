@@ -1,3 +1,15 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:c91f96bd11cfb33d41a9fa37c557bb73fd24c72484bcc3bdfa1dc162520da777
-size 252
+{
+    "name": "gui",
+    "version": "1.0.0",
+    "description": "",
+    "main": "src/index.js",
+    "scripts": {
+        "start": "electron src/index.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "electron": "^18.0.3"
+    }
+}
