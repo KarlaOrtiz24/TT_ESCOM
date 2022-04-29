@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Ver
+{{ super() }}
+{% endblock %}
+
+{% block content%}
+<div class="container-fluid bg_principal_img vw-100 vh-100">
+    <div class="row">
+        <div class="col-4 vh-100">
+            <div class="card d-flex menu_card m-3">
+                <div class="row d-flex flex-column align-items-center superior_menucard_row">
+                    <button class="menu_shape_btn">
+                        <img src="{{ url_for('static', filename = '../static/img/shapes/mini_cam.png') }}" class="mb-3">
+                    </button>
+                    <p class="text-center font_secondary_bold">Sección para mostrar texto traducido</p>
+                </div>
+                <div class="row d-flex flex-column align-items-center">
+                    <a href="{{ url_for('escucha') }}" class="text-center">
+                        <button class="btn btn_selection mb-3">
+                            Escuchar
+                        </button>
+                    </a>
+                    <a href="{{ url_for('menuPrincipal') }}" class="text-center">
+                        <button class="btn btn_selection mb-3">
+                            Salir
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="card menu_card m-3 d-flex justify-content-center font_secondary_bold">
+                <p class="text-center">
+                    Sección donde se mostrará la cámara para que el niño señe
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename = '../static/css/Bootstrap/css/bootstrap.min.css') }}"">
+    <link rel=" stylesheet" href="{{ url_for('static', filename = '../static/css/own_styles.css') }}">
+    <title>{% block title %} | KIYA {% endblock %}</title>
+</head>
+
+<body>
+
+    {% block content %}
+
+    {% endblock %}
+
+    <script src="{{ url_for('static', filename = '../static/js/Bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+</body>
+
+</html>
