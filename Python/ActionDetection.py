@@ -13,7 +13,8 @@ from tensorflow.keras.utils import to_categorical
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense
 from tensorflow.keras.callbacks import TensorBoard
-from sklearn.metrics import confusion_matrix, classification_report
+from sklearn.metrics import multilabel_confusion_matrix, accuracy_score
+
 import pandas as pd 
 import seaborn as sn 
 
@@ -250,3 +251,19 @@ print('Precision: {:.1f}%'.format(100*puntaje[1]))
 print(puntaje)
 print('Test loss:', test_eval[0])
 print('Test accuracy:', test_eval[1])
+
+
+res = model.predict(X_test)
+actions[np.argmax(res[4])]
+actions[np.argmax(y_test[4])]
+
+#Modelo y pesos guardados
+model.save('action.h5')
+del model
+model.load_weights('action.h5')
+
+#Matriz de confusión
+yhat = model.predict(X_test)
+ytrue = np.argmax(y_test, axis=1).tolist()
+yhat = np.argmax(yhat, axis=1).tolist()
+multilabel_confusion_matrix(ytrue, yhat)
