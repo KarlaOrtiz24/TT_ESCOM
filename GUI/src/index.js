@@ -1,16 +1,31 @@
 const { app, BrowserWindow } = require('electron');
+const { spawn } = require('child_process');
 const url = require('url');
 const path = require('path');
+const os = require('os');
+let miSo = os.platform();
 
-let mainWindow;
+function createWindow() {
+    const mainWindow = new BrowserWindow({
+        width: 1024,
+        height: 768,
+        resizable: false,
+        webPreferences: {
+            nodeIntegration: true
+        }
+    })
+    mainWindow.loadURL('/');
+};
 
-app.on('ready', () => {
+if (miSo.toLowerCase() === 'win32') {
+    app.whenReady().then(
+        spawn('python', ['./main.py']),
+        createWindow
+    );
+} else {
+    // app.whenReady().then({
 
-    mainWindow = new BrowserWindow({});
-    mainWindow.loadURL(url.format({
-        pathname: path.join(__dirname, 'templates/index.html'),
-        protocol: 'file',
-        slashes: true
-    }));
+    // });
 
-});
+    console.log(miSo);
+}
