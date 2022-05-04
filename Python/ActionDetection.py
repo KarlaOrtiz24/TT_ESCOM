@@ -230,7 +230,7 @@ y_test.shape
 
 #Red neuronal 
 #El modelo es secuencial, 3 capas LSTM  y 3 capas densas con distintas neuronas en cada una. 
-log_dir = os.path.join('Logs')
+log_dir = os.path.join('Logs2')
 tb_callback = TensorBoard(log_dir=log_dir)
 model = Sequential()
 model.add(LSTM(100, return_sequences=True, activation='relu', input_shape=(20,1662)))
@@ -258,12 +258,12 @@ actions[np.argmax(res[4])]
 actions[np.argmax(y_test[4])]
 
 #Modelo y pesos guardados
-model.save('action.h5')
+model.save('action2.h5')
 #del model
-model.load_weights('action.h5')
+model.load_weights('action2.h5')
 
 #Matriz de confusión
 yhat = model.predict(X_test)
 ytrue = np.argmax(y_test, axis=1).tolist()
 yhat = np.argmax(yhat, axis=1).tolist()
-multilabel_confusion_matrix(ytrue, yhat)
+print(multilabel_confusion_matrix(ytrue, yhat))
