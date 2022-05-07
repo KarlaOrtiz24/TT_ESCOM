@@ -1,31 +1,46 @@
 const { app, BrowserWindow } = require('electron');
-const { spawn } = require('child_process');
+// const { spawn } = require('child_process');
 const url = require('url');
 const path = require('path');
 const os = require('os');
-let miSo = os.platform();
+// let miSo = os.platform();
 
 function createWindow() {
     const mainWindow = new BrowserWindow({
-        width: 1024,
+        width: 1366,
         height: 768,
         resizable: false,
         webPreferences: {
             nodeIntegration: true
         }
     })
-    mainWindow.loadURL('/');
+
+    let python = require('child_process').spawn(
+        'py',
+        ['./src/main.py']
+    );
+
+    python.stdout.on('data', function (data) {
+        console.log('data: ', data.toString('utf8'));
+    });
+
+    python.stderr.on('data', (data) => {
+        console.log(`stderr: ${data}`);
+    });
+
+    mainWindow.loadURL('http://127.0.0.1:5000/');
 };
 
-if (miSo.toLowerCase() === 'win32') {
-    app.whenReady().then(
-        spawn('python', ['./main.py']),
-        createWindow
-    );
-} else {
-    // app.whenReady().then({
+app.whenReady().then(createWindow);
 
-    // });
+app.on('activate', () => {
+    if (process.platform !== 'darwin') {
+        app.quit();
+    }
+});
 
-    console.log(miSo);
-}
+app.on('activate', () => {
+    if (BrowserWindow.getAllWindows().length === 0) {
+        createWindow();
+    }
+});
