@@ -14,6 +14,8 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense
 from tensorflow.keras.callbacks import TensorBoard
 from sklearn.metrics import multilabel_confusion_matrix, accuracy_score
+from sklearn.metrics import confusion_matrix, classification_report
+from scipy import stats
 
 import pandas as pd 
 import seaborn as sn 
@@ -230,7 +232,7 @@ y_test.shape
 
 #Red neuronal 
 #El modelo es secuencial, 3 capas LSTM  y 3 capas densas con distintas neuronas en cada una. 
-log_dir = os.path.join('Logs2')
+log_dir = os.path.join('Logs3')
 tb_callback = TensorBoard(log_dir=log_dir)
 model = Sequential()
 model.add(LSTM(100, return_sequences=True, activation='relu', input_shape=(20,1662)))
@@ -239,8 +241,9 @@ model.add(LSTM(64, return_sequences=False, activation='relu'))
 model.add(Dense(1000, activation='relu'))
 model.add(Dense(800, activation='relu'))
 model.add(Dense(actions.shape[0], activation='softmax'))
-model.compile(optimizer='Adam', loss='categorical_crossentropy', metrics=['categorical_accuracy'])
-model.fit(X_train, y_train, epochs=100, callbacks=[tb_callback])
+model.compile(optimizer='Adam', loss='categorical_crossentropy', 
+metrics=['categorical_accuracy'])
+ABC_model= model.fit(X_train, y_train, epochs=100, callbacks=[tb_callback])
 model.summary()
 
 
@@ -253,12 +256,37 @@ print('Test loss:', test_eval[0])
 print('Test accuracy:', test_eval[1])
 
 
+
+plt.figure(0)  
+plt.plot(ABC_model.history['accuracy'],'r')  
+plt.plot(ABC_model.history['val_accuracy'],'g')  
+plt.xticks(np.arange(0, 11, 2.0))  
+plt.rcParams['figure.figsize'] = (8, 6)  
+plt.X_test("Num of Epochs")  
+plt.y_test("Accuracy")  
+plt.title("Training Accuracy vs Validation Accuracy")  
+plt.legend(['train','validation'])
+
+plt.figure(1)  
+plt.plot(ABC_model.history['loss'],'r')  
+plt.plot(ABC_model.history['val_loss'],'g')  
+plt.xticks(np.arange(0, 11, 2.0))  
+plt.rcParams['figure.figsize'] = (8, 6)  
+plt.X_test("Num of Epochs")  
+plt.y_test("Loss")  
+plt.title("Training Loss vs Validation Loss")  
+plt.legend(['train','validation'])
+plt.show()
+
+
+
 res = model.predict(X_test)
 actions[np.argmax(res[4])]
 actions[np.argmax(y_test[4])]
 
 #Modelo y pesos guardados
-model.save('action2.h5')
+model.save('action2.h5') #No correr, Action 2 es red funcional con porcentaje de 96, para correr
+#y guardar otra CAMBIAR el NOMBRE
 #del model
 model.load_weights('action2.h5')
 
@@ -267,3 +295,32 @@ yhat = model.predict(X_test)
 ytrue = np.argmax(y_test, axis=1).tolist()
 yhat = np.argmax(yhat, axis=1).tolist()
 print(multilabel_confusion_matrix(ytrue, yhat))
+
+snn_df_cm = pd.DataFrame(ytrue, yhat, range(21), range(21))
+plt.figure(figsize = (20,14))  
+sn.set(font_scale=1.4) #for label size  
+sn.heatmap(snn_df_cm, annot=True, annot_kws={"size": 12}) # font size  
+plt.show()
+
+
+
+
+
+snn_pred = model.predict(X_test, batch_size=32, verbose=1)
+snn_predicted = np.argmax(snn_pred, axis=1)
+print('snn_pred: ', snn_pred)
+print()
+print('snn_predicted: ', snn_predicted)
+print()
+#Creamos la matriz de confusión
+snn_cm = confusion_matrix(np.argmax(X_test, axis=1), snn_predicted)
+print("SNN: ",snn_cm)
+print()
+#Visualizamos la matriz de confusión
+snn_df_cm = pd.DataFrame(snn_cm, range(21), range(21))
+plt.figure(figsize = (20,14))  
+sn.set(font_scale=1.4) #for label size  
+sn.heatmap(snn_df_cm, annot=True, annot_kws={"size": 12}) # font size  
+plt.show()
+
+
