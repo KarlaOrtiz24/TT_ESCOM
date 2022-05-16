@@ -84,86 +84,112 @@ while (1):
                 #cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 3)
                 cv2.putText(frame, '{}'.format(dir_img[0]), (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
                 letra = "a"
+                print("a")
             elif respuesta == 1:
                 #cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 3)
                 cv2.putText(frame, '{}'.format(dir_img[1]), (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
                 letra = "b"
+                print("b")
             elif respuesta == 2:
                 #    cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 3)
                     cv2.putText(frame, '{}'.format(dir_img[2]), (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
                     letra = "c"
+                    print("c")
             elif respuesta == 3:
                  #   cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 3)
                 cv2.putText(frame, '{}'.format(dir_img[3]), (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
                 letra = "d"
+                print("d")               
             elif respuesta == 4:
               #  cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 3)
                 cv2.putText(frame, '{}'.format(dir_img[4]), (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
                 letra = "e"
+                print("e")
+
             elif respuesta == 5:
                # cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 3)
                 cv2.putText(frame, '{}'.format(dir_img[5]), (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
                 letra = "f"
+                print("f")
             elif respuesta == 6:
                 #cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 3)
                 cv2.putText(frame, '{}'.format(dir_img[6]), (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
                 letra = "g"
+                print("g")
+
             elif respuesta == 7:
                 #cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 3)
                 cv2.putText(frame, '{}'.format(dir_img[7]), (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
                 letra = "h"
+                print("h")
             elif respuesta == 8:
                 #cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 3)
                 cv2.putText(frame, '{}'.format(dir_img[8]), (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
                 letra = "i"
+                print("i")
+
             elif respuesta == 9:
                 #cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 3)
                 cv2.putText(frame, '{}'.format(dir_img[9]), (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
                 letra = "l"
+                print("l")
             elif respuesta == 10:
                 #cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 3)
                 cv2.putText(frame, '{}'.format(dir_img[10]), (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
                 letra = "m"
+                print("m")
+
             elif respuesta == 11:
                 cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 3)
                 cv2.putText(frame, '{}'.format(dir_img[11]), (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
                 letra = "n"
+                print("n")
             elif respuesta == 12:
                 #cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 3)
                 cv2.putText(frame, '{}'.format(dir_img[12]), (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
                 letra = "o"
+                print("o")
             elif respuesta == 13:
                 #cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 3)
                 cv2.putText(frame, '{}'.format(dir_img[13]), (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
                 letra = "p"
+                print("p")
             elif respuesta == 14:
                 #cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 3)
                 cv2.putText(frame, '{}'.format(dir_img[14]), (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
                 letra = "r"
+                print("r")
+            
             elif respuesta == 15:
                 cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 3)
                 cv2.putText(frame, '{}'.format(dir_img[15]), (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
                 letra = "s"
+                print("s")
             elif respuesta == 16:
                 cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 3)
                 cv2.putText(frame, '{}'.format(dir_img[16]), (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
                 letra = "t"
+                print("t")
             elif respuesta == 17:
                 cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 3)
                 cv2.putText(frame, '{}'.format(dir_img[17]), (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
                 letra = "u"
+                print("u")
             elif respuesta == 18:
                 cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 3)
                 cv2.putText(frame, '{}'.format(dir_img[18]), (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
                 letra = "v"
+                print("v")
             elif respuesta == 19:
                 cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 3)
                 cv2.putText(frame, '{}'.format(dir_img[19]), (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
                 letra = "w"
+                print("w")
             elif respuesta == 20:
                 cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 3)
                 cv2.putText(frame, '{}'.format(dir_img[20]), (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
                 letra = "y"
+                print("y")
             else:
                 cv2.putText(frame, 'LETRA_DESCONOCIDA', (x1, y1 - 5), 1, 1.3, (0, 255, 255), 1, cv2.LINE_AA)
 

@@ -246,7 +246,8 @@ metrics=['categorical_accuracy'])
 ABC_model= model.fit(X_train, y_train, epochs=100, callbacks=[tb_callback])
 model.summary()
 
-
+print(X_test[0].shape
+)
 
 test_eval = model.evaluate(X_test, y_test, verbose=1)
 puntaje = model.evaluate(X_train, y_train, verbose=0)
@@ -255,40 +256,15 @@ print(puntaje)
 print('Test loss:', test_eval[0])
 print('Test accuracy:', test_eval[1])
 
-
-
-plt.figure(0)  
-plt.plot(ABC_model.history['accuracy'],'r')  
-plt.plot(ABC_model.history['val_accuracy'],'g')  
-plt.xticks(np.arange(0, 11, 2.0))  
-plt.rcParams['figure.figsize'] = (8, 6)  
-plt.X_test("Num of Epochs")  
-plt.y_test("Accuracy")  
-plt.title("Training Accuracy vs Validation Accuracy")  
-plt.legend(['train','validation'])
-
-plt.figure(1)  
-plt.plot(ABC_model.history['loss'],'r')  
-plt.plot(ABC_model.history['val_loss'],'g')  
-plt.xticks(np.arange(0, 11, 2.0))  
-plt.rcParams['figure.figsize'] = (8, 6)  
-plt.X_test("Num of Epochs")  
-plt.y_test("Loss")  
-plt.title("Training Loss vs Validation Loss")  
-plt.legend(['train','validation'])
-plt.show()
-
-
-
 res = model.predict(X_test)
 actions[np.argmax(res[4])]
 actions[np.argmax(y_test[4])]
 
 #Modelo y pesos guardados
-model.save('action2.h5') #No correr, Action 2 es red funcional con porcentaje de 96, para correr
+model.save('action3.h5') #No correr, Action 2 es red funcional con porcentaje de 96, para correr
 #y guardar otra CAMBIAR el NOMBRE
 #del model
-model.load_weights('action2.h5')
+model.load_weights('action3.h5')
 
 #Matriz de confusión
 yhat = model.predict(X_test)
@@ -296,31 +272,77 @@ ytrue = np.argmax(y_test, axis=1).tolist()
 yhat = np.argmax(yhat, axis=1).tolist()
 print(multilabel_confusion_matrix(ytrue, yhat))
 
-snn_df_cm = pd.DataFrame(ytrue, yhat, range(21), range(21))
-plt.figure(figsize = (20,14))  
-sn.set(font_scale=1.4) #for label size  
-sn.heatmap(snn_df_cm, annot=True, annot_kws={"size": 12}) # font size  
-plt.show()
 
 
 
+colors = [(245,117,16), (117,245,16), (16,117,245)]
+def prob_viz(res, actions, input_frame, colors):
+    output_frame = input_frame.copy()
+    for num, prob in enumerate(res):
+        cv2.rectangle(output_frame, (0,60+num*40), (int(prob*100), 90+num*40), colors[num], -1)
+        cv2.putText(output_frame, actions[num], (0, 85+num*40), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2, cv2.LINE_AA)
+        
+    return output_frame
+plt.figure(figsize=(18,18))
+plt.imshow(prob_viz(res, actions, image, colors))
 
 
-snn_pred = model.predict(X_test, batch_size=32, verbose=1)
-snn_predicted = np.argmax(snn_pred, axis=1)
-print('snn_pred: ', snn_pred)
-print()
-print('snn_predicted: ', snn_predicted)
-print()
-#Creamos la matriz de confusión
-snn_cm = confusion_matrix(np.argmax(X_test, axis=1), snn_predicted)
-print("SNN: ",snn_cm)
-print()
-#Visualizamos la matriz de confusión
-snn_df_cm = pd.DataFrame(snn_cm, range(21), range(21))
-plt.figure(figsize = (20,14))  
-sn.set(font_scale=1.4) #for label size  
-sn.heatmap(snn_df_cm, annot=True, annot_kws={"size": 12}) # font size  
-plt.show()
+sequence = []
+sentence = []
+predictions = []
+threshold = 0.5
 
+cap = cv2.VideoCapture(0)
+# Set mediapipe model 
+with mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=0.5) as holistic:
+    while cap.isOpened():
 
+        # Read feed
+        ret, frame = cap.read()
+
+        # Make detections
+        image, results = mediapipe_detection(frame, holistic)
+        print(results)
+        
+        # Draw landmarks
+        draw_styled_landmarks(image, results)
+        
+        # 2. Prediction logic
+        keypoints = extract_keypoints(results)
+        sequence.append(keypoints)
+        sequence = sequence[-30:]
+        
+        if len(sequence) == 30:
+            res = model.predict(np.expand_dims(sequence, axis=0))[0]
+            print(actions[np.argmax(res)])
+            predictions.append(np.argmax(res))
+            
+            
+        #3. Viz logic
+            if np.unique(predictions[-10:])[0]==np.argmax(res): 
+                if res[np.argmax(res)] > threshold: 
+                    
+                    if len(sentence) > 0: 
+                        if actions[np.argmax(res)] != sentence[-1]:
+                            sentence.append(actions[np.argmax(res)])
+                    else:
+                        sentence.append(actions[np.argmax(res)])
+
+            if len(sentence) > 5: 
+                sentence = sentence[-5:]
+
+            # Viz probabilities
+            image = prob_viz(res, actions, image, colors)
+            
+        cv2.rectangle(image, (0,0), (640, 40), (245, 117, 16), -1)
+        cv2.putText(image, ' '.join(sentence), (3,30), 
+                       cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
+        
+        # Show to screen
+        cv2.imshow('OpenCV Feed', image)
+
+        # Break gracefully
+        if cv2.waitKey(10) & 0xFF == ord('q'):
+            break
+    cap.release()
+    cv2.destroyAllWindows()
