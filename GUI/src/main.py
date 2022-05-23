@@ -1,21 +1,15 @@
 from flask import Flask
 from flask import render_template
 from flask import Response
-import cv2 as cv 
 
 app = Flask(__name__)
-cap = cv.VideoCapture(0, cv.CAP_DSHOW)
 
 def iniciarCamara():
+    from camara import VideoCamara
+    cam = VideoCamara()
     while True:
-        ret, frame = cap.read()
-        if ret:
-            frame = cv.flip(frame, 1)
-            (flag, encodedImage) = cv.imencode('.jpg', frame)
-            if not flag:
-                continue
-            
-            yield(b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + bytearray(encodedImage) + b'\r\n')
+        frame = cam.get_frame()
+        yield(b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + bytearray(frame) + b'\r\n')
 
 @app.route('/camara')
 def camara():
@@ -39,5 +33,4 @@ def menuPrincipal():
 
 if __name__ == '__main__':
     app.run(debug=False)
-
-cap.release()
+    
