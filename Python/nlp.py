@@ -1,21 +1,30 @@
-from spacy.lang.es import Spanish
+import stanza
 
-#creación objeto nlp
-nlp = Spanish()
+# La descarga del modelo debe realizarse solo en instalación o actualización
+# stanza.download('es')
 
-#Creado procesando un string de texto con el objeto de nlp
-doc = nlp("El abuelo come durazno")
+def nlp(Frase):
+    #Creación objeto nlp
+    nlp = stanza.Pipeline('es', processors='tokenize,lemma,pos,mwt', logging_level='WARN')
+    doc = nlp(Frase)
+    dicts = doc.to_dict()
 
-for token in doc:
-    print(token.text) 
-    
+    lemma = []
+    for token in dicts[0]:
+        lemma.append(token['lemma'])
+
+        #Comprobamos que el token no sea un articulo
+        if(token['upos'] == "DET" and 'PronType=Art' in token['feats']):
+            lemma.pop()
+
+        #Comprobamos que no aparezcan los verbos ser o estar
+        if(token['lemma'] == "estar" or token['lemma'] == "ser"):
+            lemma.pop()
+
+        #Comprobamos la cantidad de los sustantivos
+        if (token['upos'] == "NOUN" and'Number=Plur' in token['feats']):
+            lemma.append('muchos')
 
 
-# tok = doc[1]
-# tok.i #indice
-# tok.text #texto
-# tok.is_alpha() #Alfabetivo
-# tok.is_punct() #puntuacion
-# tok.like_num() #es o parece numero
+    return lemma
 
-#https://www.youtube.com/watch?v=RNiLVCE5d4k
