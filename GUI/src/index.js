@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, Tray, nativeImage } = require('electron');
 // const { spawn } = require('child_process');
 const url = require('url');
 const path = require('path');
@@ -7,6 +7,7 @@ const os = require('os');
 
 function createWindow() {
     const mainWindow = new BrowserWindow({
+        icon: './static/img/logo/KAYI-icon.png',
         width: 1366,
         height: 768,
         resizable: false,
@@ -14,6 +15,16 @@ function createWindow() {
             nodeIntegration: true
         }
     })
+
+    mainWindow.setMenu(null);
+
+    mainWindow.on('closed', () => {
+        app.quit();
+    });
+
+    // const icon = new Tray('./static/img/logo/KAYI-icon.png');
+
+    console.log(icon, mainWindow);
 
     let python = require('child_process').spawn(
         'py',

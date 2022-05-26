@@ -11,10 +11,10 @@ Ver
         <div class="col-4 vh-100">
             <div class="card d-flex menu_card m-3">
                 <div class="row d-flex flex-column align-items-center superior_menucard_row">
-                    <button class="menu_shape_btn">
+                    <button class="menu_shape_btn" onclick="camara()">
                         <img src="{{ url_for('static', filename = '../static/img/shapes/mini_cam.png') }}" class="mb-3">
                     </button>
-                    <p class="text-center font_secondary_bold">Sección para mostrar texto traducido</p>
+                    <p class="text-center font_secondary_bold">Presiona la cámara para iniciar...</p>
                 </div>
                 <div class="row d-flex flex-column align-items-center">
                     <a href="{{ url_for('escucha') }}" class="text-center">
@@ -31,8 +31,7 @@ Ver
             </div>
         </div>
         <div class="col-8">
-            <div class="card menu_card m-3 d-flex justify-content-center font_secondary_bold">
-                <img src="{{ url_for('camara') }}" class="m-5 rounded-3 border border-white border-3" id="camara">
+            <div class="card menu_card m-3 d-flex justify-content-center font_secondary_bold" id="cam-content">
             </div>
         </div>
     </div>
