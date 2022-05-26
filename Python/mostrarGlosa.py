@@ -3,6 +3,7 @@ import pymongo
 from tkinter import *
 
 cliente = pymongo.MongoClient( "mongodb+srv://user:1234@cluster0.aovos.mongodb.net/test")
+# cliente = pymongo.MongoClient( "mongodb://localhost:27017")
 db = cliente["KAYI"]
 senas = db["LSM"]
 

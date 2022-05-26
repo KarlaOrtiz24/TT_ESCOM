@@ -40,11 +40,11 @@ while(True):
     
     ret, frame = cap.read()
     
-    cv2.rectangle(frame, (100, 100), (300, 300), (0, 0, 255), 5) 
+    cv2.rectangle(frame, (100, 100), (300, 300), (255, 0, 0), 2) 
     #region of intrest
     roi = frame[100:300, 100:300]
     img = cv2.resize(roi, (60, 60))
-    cv2.imshow('roi', roi)
+    # cv2.imshow('roi', roi)
     
 
     img2 = img/255
@@ -60,7 +60,7 @@ while(True):
 
     font = cv2.FONT_HERSHEY_TRIPLEX
     fontScale = 1
-    color = (0,255,255)
+    color = (0,255,0)
     thickness = 2
 
     #writing the predicted char and its confidence percentage to the frame
