@@ -65,6 +65,7 @@ while(True):
 
     #writing the predicted char and its confidence percentage to the frame
     msg = predicted_char +', Conf: ' +str(confidence)+' %'
+    print(predicted_char)
     cv2.putText(frame, msg, (80, 80), font, fontScale, color, thickness)
     
     cv2.imshow('frame',frame)

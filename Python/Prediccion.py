@@ -161,32 +161,32 @@ while (1):
                 print("r")
             
             elif respuesta == 15:
-                cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 3)
+                #cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 3)
                 cv2.putText(frame, '{}'.format(dir_img[15]), (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
                 letra = "s"
                 print("s")
             elif respuesta == 16:
-                cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 3)
+                #cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 3)
                 cv2.putText(frame, '{}'.format(dir_img[16]), (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
                 letra = "t"
                 print("t")
             elif respuesta == 17:
-                cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 3)
+                #cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 3)
                 cv2.putText(frame, '{}'.format(dir_img[17]), (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
                 letra = "u"
                 print("u")
             elif respuesta == 18:
-                cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 3)
+                #cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 3)
                 cv2.putText(frame, '{}'.format(dir_img[18]), (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
                 letra = "v"
                 print("v")
             elif respuesta == 19:
-                cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 3)
+                #cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 3)
                 cv2.putText(frame, '{}'.format(dir_img[19]), (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
                 letra = "w"
                 print("w")
             elif respuesta == 20:
-                cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 3)
+                #cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 3)
                 cv2.putText(frame, '{}'.format(dir_img[20]), (x1, y1 - 5), 1, 1.3, (255, 0, 0), 1, cv2.LINE_AA)
                 letra = "y"
                 print("y")
