@@ -2,12 +2,7 @@ import cv2
 import pymongo
 from tkinter import *
 
-<<<<<<< HEAD
-cliente = pymongo.MongoClient( "mongodb+srv://user:1234@cluster0.aovos.mongodb.net/test")
-# cliente = pymongo.MongoClient( "mongodb://localhost:27017")
-=======
 cliente = pymongo.MongoClient( "mongodb://localhost:27017")
->>>>>>> 753fa33ce1e7a7becdc25c0489d052b85cfaed5f
 db = cliente["KAYI"]
 senas = db["LSM"]
 
