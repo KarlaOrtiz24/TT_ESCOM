@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import render_template
 from flask import Response
+import random
 
 app = Flask(__name__)
 
@@ -56,6 +57,14 @@ def escucha():
 @app.route('/ver')
 def ver():
     return render_template('ver.html')
+
+@app.route('/carga')
+def carga():
+    pantallas_carga = ['', '1', '2', '3']
+    eleccion = random.randint(0, 3)
+    pantalla = 'loading' + pantallas_carga[eleccion] + '.html'
+    
+    return render_template(pantalla)
 
 @app.route('/menu-principal')
 def menuPrincipal():
