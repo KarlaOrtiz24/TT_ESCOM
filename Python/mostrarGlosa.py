@@ -38,7 +38,7 @@ def obtenerData(palabra):
         consulta = {"Femenino": palabra}
         doc = senas.find_one(consulta)
         if (doc is not None):
-            res = [doc['Data'], "../BD/mujer.mp4"]
+            res = [doc['Data'], "../BD/femenino.mp4"]
             return res
 
     if (doc is None):
