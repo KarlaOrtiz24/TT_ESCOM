@@ -3,6 +3,7 @@ const { app, BrowserWindow, Tray, nativeImage } = require('electron');
 const url = require('url');
 const path = require('path');
 const os = require('os');
+const { dirname } = require('path');
 // let miSo = os.platform();
 
 function createWindow() {
@@ -11,10 +12,21 @@ function createWindow() {
         width: 1366,
         height: 768,
         resizable: false,
+        show: false,
         webPreferences: {
-            nodeIntegration: true
+            nodeIntegration: true,
+            preload: path.join(__dirname, 'preload.js')
         }
     })
+
+    const splash = new BrowserWindow({
+        width: 500,
+        height: 300,
+        transparent: true,
+        frame: false,
+        alwaysOnTop: true
+    });
+    splash.loadFile(path.join(__dirname, '/templates/loading.html'));
 
     mainWindow.setMenu(null);
 
@@ -36,6 +48,8 @@ function createWindow() {
     });
 
     mainWindow.loadURL('http://127.0.0.1:5000/');
+
+    mainWindow.webContents.openDevTools();
 };
 
 app.whenReady().then(createWindow);
