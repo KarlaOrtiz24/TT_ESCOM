@@ -15,6 +15,7 @@ Escucha
                         <img src="{{ url_for('static', filename = '../static/img/shapes/mini_mic.png') }}" class="mb-3">
                     </button>
                     <p class="text-center font_secondary_bold">Habla fuerte y claro <br> para que podamos escucharte</p>
+                    {{ data }}
                 </div>
                 <div class="row d-flex flex-column align-items-center">
                     <a href="{{ url_for('ver') }}" class="text-center">
@@ -32,7 +33,6 @@ Escucha
         </div>
         <div class="col-8">
             <div class="card menu_card m-3 d-flex justify-content-center font_secondary_bold">
-                {{cad}}
             </div>
         </div>
     </div>
