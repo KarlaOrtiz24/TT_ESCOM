@@ -1,18 +1,43 @@
-{% extends 'layout.html' %}
+<!DOCTYPE html>
+<html lang="es">
 
-{% block title %}
-Cargando
-{{ super() }}
-{% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/Bootstrap/css/bootstrap.min.css">
+    <link rel=" stylesheet" href="../static/css/own_styles.css">
+    <link rel="icon" href="../static/img/logo/KAYI.png">
+</head>
 
-{% block content %}
-<div class="container bg_loading_img vw-100 vh-100">
-    <div class="row d-flex justify-content-center w-100 h-100 ">
-        <div class="spinner-border font_primary_light spinner_size text-center" role="status">
+<body>
+
+    <div class="container bg_loading_img vw-100 vh-100">
+        <div class="row d-flex flex-column justify-content-center w-100 h-100 align-content-center ">
+            <div class="spinner-border d-flex align-self-center font_primary spinner_size" role="status">
+            </div>
+            <div class="list_container d-flex align-self-center text-center mt-4">
+                <ul class="d-flex align-self-center flex-column">
+                    <li class="font_primary_light text-center">
+                        Cargando señas
+                    </li>
+                    <li class="font_primary_light text-center">
+                        Iniciando voz
+                    </li>
+                    <li class="font_primary_light text-center">
+                        Aprendiendo a escribir
+                    </li>
+                    <li class="font_primary_light text-center">
+                        Aprendiendo a leer
+                    </li>
+                </ul>
+            </div>
         </div>
-        <h1 class="font_primary_light text-center ">
-            Cargando señas
-        </h1>
     </div>
-</div>
-{% endblock %}
+
+    <script src="../static/js/Bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="../static/js/kayi-utils-inicio.js"></script> -->
+    <script src="../static/js/kayi-utils-splashscreen.js"></script>
+</body>
+
+</html>

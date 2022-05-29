@@ -1,3 +1,5 @@
+"use_strict"
+
 function camara() {
     const cam = document.querySelector('#camara');
     const camContent = document.querySelector('#cam-content')

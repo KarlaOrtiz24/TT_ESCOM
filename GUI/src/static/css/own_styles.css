@@ -11,7 +11,8 @@
 
 .font_primary_light {
     color: #6666FF;
-    font-weight: 400;
+    font-weight: 350;
+    font-size: 1.8rem;
 }
 
 .font_secondary {
@@ -25,7 +26,8 @@
 }
 
 .spinner_size {
-    margin-top: 15rem;
+    margin-top: 3rem;
+    /* margin-bottom: 2rem; */
     width: 7rem;
     height: 7rem;
 }
@@ -135,14 +137,30 @@
     margin: 7rem 0rem;
 }
 
-.hexagono {
+/* .hexagono {
     animation: hex infinite;
+} */
+
+.list_container {
+    width: 22rem;
+    height: 2.5rem;
+    overflow: hidden;
+}
+
+.list_container>ul {
+    list-style: none;
+    height: 100%;
+    /* width: 100%; */
+}
+
+.list_container > ul > li {
+    text-align: center;
 }
 
 @keyframes hex {
     0% {
         transform: rotate(45deg);
-        
+
     }
 
     50% {

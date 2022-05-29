@@ -20,12 +20,14 @@ function createWindow() {
     })
 
     const splash = new BrowserWindow({
+        icon: __dirname + '/static/img/logo/KAYI-icon.png',
         width: 500,
         height: 300,
         transparent: true,
         frame: false,
         alwaysOnTop: true
     });
+
     splash.loadFile(path.join(__dirname, '/templates/loading.html'));
 
     mainWindow.setMenu(null);
@@ -49,7 +51,12 @@ function createWindow() {
 
     mainWindow.loadURL('http://127.0.0.1:5000/');
 
-    mainWindow.webContents.openDevTools();
+    setTimeout(function () {
+        splash.close();
+        mainWindow.show();
+    }, 10000);
+
+    // mainWindow.webContents.openDevTools();
 };
 
 app.whenReady().then(createWindow);

@@ -3,7 +3,8 @@ from flask import render_template
 from flask import Response
 from flask import request
 from flask import jsonify
-import random
+from flask import redirect
+from flask import url_for
 
 app = Flask(__name__)
 
@@ -30,17 +31,13 @@ def escucha():
 def ver():
     return render_template('ver.html')
 
-@app.route('/carga')
-def carga():
-    pantallas_carga = ['', '1', '2', '3']
-    eleccion = random.randint(0, 3)
-    pantalla = 'loading' + pantallas_carga[eleccion] + '.html'
-    
-    return render_template(pantalla)
-
 @app.route('/menu-principal')
 def menuPrincipal():
     return render_template('menu-principal.html')
+
+# @app.route('/test')
+# def testServer():
+#     return redirect('/')
 
 if __name__ == '__main__':
     app.run(debug=False)
