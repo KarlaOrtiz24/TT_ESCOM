@@ -273,7 +273,7 @@ print(multilabel_confusion_matrix(ytrue, yhat))
 
 
 
-
+""""
 colors = [(245,117,16), (117,245,16), (16,117,245)]
 def prob_viz(res, actions, input_frame, colors):
     output_frame = input_frame.copy()
@@ -348,3 +348,4 @@ with mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=
             break
     cap.release()
     cv2.destroyAllWindows()
+"""
