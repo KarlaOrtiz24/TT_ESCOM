@@ -10,3 +10,10 @@ function camara() {
         alert('Cámara activada');
     }
 };
+
+// function ajax() {
+//     const http = new XMLHttpRequest();
+//     const url = 'http://localhost:5000/carga';
+
+//     if()
+// };
