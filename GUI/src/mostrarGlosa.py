@@ -1,6 +1,7 @@
 import cv2
 import pymongo
 from tkinter import *
+import Routes.Routes as routes
 
 cliente = pymongo.MongoClient( "mongodb+srv://user:1234@cluster0.aovos.mongodb.net/test")
 # cliente = pymongo.MongoClient( "mongodb://localhost:27017")
@@ -11,8 +12,9 @@ senas = db["LSM"]
 def mostrarVideo(Data):
     #url = "../BD/" + palabra + ".mp4"
     #capture = cv2.VideoCapture(url)
+    video = routes.juntarConPadre(__file__, Data)
     
-    capture = cv2.VideoCapture(Data)
+    capture = cv2.VideoCapture(video)
     
     while (capture.isOpened()):
         ret, frame = capture.read()

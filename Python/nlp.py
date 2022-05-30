@@ -61,7 +61,6 @@ def nlp(Frase):
             #Comprobamos la cantidad de los sustantivos
             if (token['upos'] == "NOUN" and 'Number=Plur' in token['feats']):
                 lemma.append('muchos')
-   
 
         except:
             continue

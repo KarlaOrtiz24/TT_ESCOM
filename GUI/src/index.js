@@ -14,8 +14,8 @@ function createWindow() {
         resizable: false,
         show: false,
         webPreferences: {
-            nodeIntegration: true,
-            preload: path.join(__dirname, 'preload.js')
+            nodeIntegration: true
+            // preload: path.join(__dirname, 'preload.js')
         }
     })
 
@@ -56,7 +56,7 @@ function createWindow() {
         mainWindow.show();
     }, 10000);
 
-    // mainWindow.webContents.openDevTools();
+    mainWindow.webContents.openDevTools();
 };
 
 app.whenReady().then(createWindow);

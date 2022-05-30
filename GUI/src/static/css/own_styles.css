@@ -82,6 +82,13 @@
     color: #6666FF;
 }
 
+.btn_active {
+    background: #f8f9fa;
+    border: none;
+    width: fit-content;
+    border-radius: 5%;
+}
+
 .hear_section {
     padding-left: 7rem;
     padding-top: 2rem;
@@ -153,7 +160,7 @@
     /* width: 100%; */
 }
 
-.list_container > ul > li {
+.list_container>ul>li {
     text-align: center;
 }
 

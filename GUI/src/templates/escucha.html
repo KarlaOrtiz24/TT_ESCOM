@@ -11,11 +11,11 @@ Escucha
         <div class="col-4 vh-100">
             <div class="card d-flex menu_card m-3">
                 <div class="row d-flex flex-column align-items-center superior_menucard_row">
-                    <button class="menu_shape_btn">
+                    <button class="menu_shape_btn" id="btnMicro" onclick="micro()" value="0">
                         <img src="{{ url_for('static', filename = '../static/img/shapes/mini_mic.png') }}" class="mb-3">
                     </button>
-                    <p class="text-center font_secondary_bold">Habla fuerte y claro <br> para que podamos escucharte</p>
-                    {{ data }}
+                    <p class="text-center font_secondary_bold" id="texto">Habla fuerte y claro <br> para que podamos escucharte</p>
+
                 </div>
                 <div class="row d-flex flex-column align-items-center">
                     <a href="{{ url_for('ver') }}" class="text-center">
