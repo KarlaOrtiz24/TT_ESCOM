@@ -9,15 +9,11 @@ import spacy
 from spacy import displacy
 import Routes.Routes as routes 
 
-model_dir = routes.getRutaPadre(__file__)
-model_dir = routes.juntarRutas(model_dir, '..')
-model_dir = routes.juntarRutas(model_dir, 'Convolucional.h5')
+model_dir = routes.juntarConPadre(__file__, 'Convolucional.h5')
 model = load_model(model_dir)
 model.summary()
 
-data_dir = routes.getRutaPadre(__file__)
-data_dir = routes.juntarRutas(data_dir, '..')
-data_dir = routes.juntarRutas(data_dir, 'Aprendizaje_Abecedario')
+data_dir = routes.juntarConPadre(__file__, 'Aprendizaje_Abecedario')
 labels = (os.listdir(data_dir))
 
 class VideoCamara:
@@ -30,7 +26,7 @@ class VideoCamara:
     def get_frame(self):
         ret, frame = self.video.read()
         
-        cv.rectangle(frame, (100, 100), (300, 300), (255, 0, 0), 2) 
+        cv.rectangle(frame, (100, 100), (300, 300), (255, 102, 102), 2) 
         #region of intrest
         roi = frame[100:300, 100:300]
         img = cv.resize(roi, (60, 60))
@@ -43,11 +39,12 @@ class VideoCamara:
 
         font = cv.FONT_HERSHEY_TRIPLEX
         fontScale = 1
-        color = (0,255,0)
+        color = (255, 102, 102)
         thickness = 2
 
         #writing the predicted char and its confidence percentage to the frame
-        msg = predicted_char +', Conf: ' +str(confidence)+' %'
+        msg = predicted_char 
+        # +', Conf: ' +str(confidence)+' %'
         cv.putText(frame, msg, (80, 80), font, fontScale, color, thickness)
         
         ret, jpeg = cv.imencode('.jpeg', frame)

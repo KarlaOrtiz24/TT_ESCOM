@@ -11,10 +11,9 @@ Ver
         <div class="col-4 vh-100">
             <div class="card d-flex menu_card m-3">
                 <div class="row d-flex flex-column align-items-center superior_menucard_row">
-                    <button class="menu_shape_btn" onclick="camara()">
-                        <img src="{{ url_for('static', filename = '../static/img/shapes/mini_cam.png') }}" class="mb-3">
-                    </button>
-                    <p class="text-center font_secondary_bold">Presiona la cámara para iniciar...</p>
+                    <button class="btn btn_selection mb-1" id="btnDeletrear" onclick="deletrear()">Deletrear</button>
+                    <button class="btn btn_selection mb-1" id="btnSenar" onclick="senar()">Señar</button>
+                    <p class="text-center font_secondary_bold">Presiona un botón para iniciar...</p>
                 </div>
                 <div class="row d-flex flex-column align-items-center">
                     <a href="{{ url_for('escucha') }}" class="text-center">
@@ -36,4 +35,7 @@ Ver
         </div>
     </div>
 </div>
+
+<script src="{{ url_for('static', filename = '../static/js/kayi-utils-cam.js') }}"></script>
+
 {% endblock %}
