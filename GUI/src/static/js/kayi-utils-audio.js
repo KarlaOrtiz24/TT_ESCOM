@@ -41,8 +41,13 @@ detener.addEventListener('click', (err) => {
     }
 
     const http = new XMLHttpRequest();
-    http.onreadystatechange = (e) => {
-        
+    http.onreadystatechange = function(e) {
+        if( this.readyState == 4 && this.status == 200 ){
+            console.log(this.responseText);
+        }
     }
+
+    http.open('POST', '/traducir');
+    http.send(datos);
     
 });

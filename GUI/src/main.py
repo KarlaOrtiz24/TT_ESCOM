@@ -48,7 +48,7 @@ def ver():
 def menuPrincipal():
     return render_template('menu-principal.html')
 
-@app.route('/test')
+@app.route('/senar')
 def dinamicas():
     import PrediccionAction
     senar()

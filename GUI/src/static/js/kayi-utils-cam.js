@@ -13,9 +13,9 @@ function deletrear() {
     }
 };
 
-// function senar() {
-    
-// };
+function senar() {
+    location.href = '/senar';
+};
 
 // function senar() {
 //     const cam = document.querySelector('#camara');
