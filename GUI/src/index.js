@@ -56,7 +56,7 @@ function createWindow() {
         mainWindow.show();
     }, 10000);
 
-    mainWindow.webContents.openDevTools();
+    // mainWindow.webContents.openDevTools();
 };
 
 app.whenReady().then(createWindow);

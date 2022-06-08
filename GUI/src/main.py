@@ -56,11 +56,38 @@ def dinamicas():
 
 @app.route('/traducir', methods=['GET', 'POST'])
 def traduccionVoz():
+    import mostrarGlosa
+    import nlp
+    
     if request.method == 'POST':
-        file = request.files['file']
-        print(file)
-
+        data = request.get_data()
+        # print(data.decode())
+        
+        frase = data.decode().split('"')
+        if('.' in frase[1]):
+            frase = frase[1].split('.')[0]
+        elif('¿' in frase[1]):
+            frase = frase[1].split('¿')[1]
+            frase = frase.split('?')[0]
+        
+        if(',' in frase):
+            frase = frase.split(',')
+            frase = frase[0] + frase[1]
+        
+        print(frase)
+        
+        glosa = nlp.nlp(frase)
+        print(glosa)
+        
+        data = []
+        for dato in glosa:
+            data += mostrarGlosa.obtenerData(dato)
+            # print(type(dato))
+            
+        print(data)
+        
         resp = {}
+        
         return jsonify(resp)
 
 if __name__ == '__main__':

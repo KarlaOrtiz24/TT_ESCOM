@@ -34,20 +34,18 @@ detener.addEventListener('click', (err) => {
     detener.disabled = true;
     recognition.stop();
 
-    const info = { 'texto': texto.value };
-    const datos = new FormData();
-    for(let llave in info){
-        datos.append(llave, info[llave]);
-    }
-
-    const http = new XMLHttpRequest();
-    http.onreadystatechange = function(e) {
-        if( this.readyState == 4 && this.status == 200 ){
-            console.log(this.responseText);
-        }
-    }
-
-    http.open('POST', '/traducir');
-    http.send(datos);
+    // let data = { 'texto': $('#texto').val() };
     
+    $.ajax({
+        
+        type: 'POST',
+        url: '/traducir',
+        data: JSON.stringify($('#texto').val()),
+        success: function(result){
+            texto.value = '';
+            console.log(result);
+        }
+
+    });
+
 });
