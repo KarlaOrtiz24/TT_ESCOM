@@ -8,6 +8,7 @@ const grabar = document.querySelector('#btnGrabar');
 const detener = document.querySelector('#btnDetener');
 const traducir = document.querySelector('#btnTraducir');
 const texto = document.querySelector('#texto');
+const video = document.querySelector('#video');
 
 recognition.onresult = (e) => {
     const result = e.results;
@@ -35,15 +36,21 @@ detener.addEventListener('click', (err) => {
     recognition.stop();
 
     // let data = { 'texto': $('#texto').val() };
-    
+
     $.ajax({
-        
+
         type: 'POST',
         url: '/traducir',
         data: JSON.stringify($('#texto').val()),
-        success: function(result){
+        success: function (result) {
             texto.value = '';
-            console.log(result);
+            for (let clave in result) {
+                let cad = '<video width="320" class="m-5 rounded-3 border border-white border-3" id="sena">' +
+                            '<source src="' + "{{ url_for('static', filename='../static/BD/" + result[clave] +"') }}" + '" type="video/mp4">'
+                            '</video>';
+                video.innerHTML = cad;
+                console.log(result[clave]);
+            }
         }
 
     });

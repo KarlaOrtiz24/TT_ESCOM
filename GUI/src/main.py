@@ -36,9 +36,14 @@ def senar():
 def index():
     return render_template('index.html')
 
+@app.route('/test')
+def testVideo():
+    import VozaLSM
+    return redirect('escucha')
+
 @app.route('/escucha')
 def escucha():
-    return render_template('escucha.html', data = 'Voz convertida a texto')
+    return render_template('escucha.html')
 
 @app.route('/ver')
 def ver():
@@ -58,6 +63,7 @@ def dinamicas():
 def traduccionVoz():
     import mostrarGlosa
     import nlp
+    import cv2
     
     if request.method == 'POST':
         data = request.get_data()
@@ -86,7 +92,21 @@ def traduccionVoz():
         
         for palabra in glosa:
             if palabra + '.mp4' in videos:
-                resp[palabra] = palabra + '.mp4'
+                capture = cv2.VideoCapture(routes.juntarConPadre(__file__, palabra + '.mp4'))
+                while (capture.isOpened()):
+                    ret, frame = capture.read()
+                    if (ret == True):
+                        cv2.namedWindow (palabra, cv2.WINDOW_NORMAL)
+                        cv2.imshow(palabra, frame)
+                        if cv2.waitKey(10) & 0xFF == 27:
+                            break
+                        else:
+                            break
+
+                capture.release()
+                cv2.destroyAllWindows()
+                    
+            resp[palabra] = palabra + '.mp4'
         
         return jsonify(resp)
 
