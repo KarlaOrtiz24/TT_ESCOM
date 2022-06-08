@@ -7,12 +7,6 @@ from flask import redirect
 from flask import url_for
 import Routes.Routes as routes
 from pathlib import Path
-import io
-import wave
-import numpy as np
-import scipy.io.wavfile
-import soundfile as sf
-from scipy.io.wavfile import write
 
 app = Flask(__name__)
 
@@ -54,20 +48,18 @@ def ver():
 def menuPrincipal():
     return render_template('menu-principal.html')
 
+@app.route('/test')
+def dinamicas():
+    import PrediccionAction
+    senar()
+    return redirect('ver')
+
 @app.route('/traducir', methods=['GET', 'POST'])
 def traduccionVoz():
-    import reconocedorVoz 
-    import mostrarGlosa
-    import nlp
-    
     if request.method == 'POST':
-        file = request.files.get('file')
-        file_bytes = request.files['file'].read()
-        ruta = routes.juntarRutas(routes.getRutaActual(__file__), 'audioTraducir.mp3')
-        ruta_wav = routes.juntarRutas(routes.getRutaActual(__file__), 'audioTraducir.wav')
-        
-        
-        
+        file = request.files['file']
+        print(file)
+
         resp = {}
         return jsonify(resp)
 

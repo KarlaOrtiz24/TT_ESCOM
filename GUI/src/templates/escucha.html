@@ -11,13 +11,15 @@ Escucha
         <div class="col-4 vh-100">
             <div class="card d-flex menu_card m-3">
                 <div class="row d-flex flex-column align-items-center superior_menucard_row">
-                    <button class="btn btn_selection mb-1" id="btnGrabar">Iniciar Grabación</button>
-                    <button class="btn btn_selection mb-1" id="btnDetener">Detener Grabación</button>
+                    <button class="btn btn_selection mb-1" id="btnGrabar">Reconocer voz</button>
+                    <button class="btn btn_selection mb-1" id="btnDetener">Traducir</button>
                     <!-- <button class="btn btn_selection mb-1" id="btnTraducir">Traducir</button> -->
-                    <audio class="mt-1 p-3" id="grabacion"></audio>
-                    <p class="text-center font_secondary_bold mt-2" id="texto">Habla fuerte y claro <br> para que
-                        podamos
-                        escucharte</p>
+                    <!-- <audio class="mt-1 p-3" id="grabacion"></audio> -->
+                    <div class="mb-2">
+                        <label for="texto" class="form-label text-center font_secondary_bold">Habla fuerte y claro para
+                            que podamos escucharte</label>
+                        <textarea class="form-control p-2" id="texto" rows="3"></textarea>
+                    </div>
 
                 </div>
                 <div class="row d-flex flex-column align-items-center">
@@ -42,5 +44,5 @@ Escucha
 </div>
 
 <script src="{{ url_for('static', filename = '../static/js/kayi-utils-audio.js') }}"></script>
-
+<!-- <script src="{{ url_for('static', filename = '../static/js/kayi-utils-pruebas.js') }}"></script> -->
 {% endblock %}

@@ -1,52 +1,48 @@
 "use_strict"
+
+let recognition = new webkitSpeechRecognition();
+recognition.lang = 'es-MX';
+recognition.continuous = true;
+recognition.interimResults = false;
 const grabar = document.querySelector('#btnGrabar');
 const detener = document.querySelector('#btnDetener');
 const traducir = document.querySelector('#btnTraducir');
-const grabacion = document.querySelector('#grabacion');
+const texto = document.querySelector('#texto');
 
-navigator.mediaDevices.getUserMedia({ audio: true })
-    .then((stream) => {
-        handlerFunction(stream);
-    });
-
-function handlerFunction(stream) {
-    rec = new MediaRecorder(stream);
-    rec.ondataavailable = (e) => {
-        audioGrabado.push(e.data);
-        if (rec.state == 'inactive') {
-            let blob = new Blob(audioGrabado, { type: 'audio/mp3' });
-            grabacion.src = URL.createObjectURL(blob);
-            grabacion.controls = true;
-            grabacion.autoplay = true;
-
-            const data = new FormData();
-            data.append('file', blob, 'file');
-
-            fetch('/traducir', {
-                method: 'POST',
-                body: data
-            }).then(response => response.json()
-            ).then(json => {
-                console.log(json);
-            });
-
-        }
-    };
+recognition.onresult = (e) => {
+    const result = e.results;
+    const frase = result[result.length - 1][0].transcript;
+    texto.value += frase;
 };
 
+recognition.onend = (e) => {
+    alert('He dejado de reconocer');
+}
+
 grabar.addEventListener('click', (err) => {
-    // console.log('Iniciar grabación');
+    alert('He iniciado el reconocimiento');
     grabar.classList.add('btn_selection_selected');
     grabar.disabled = true;
     detener.disabled = false;
     audioGrabado = [];
-    rec.start();
+    recognition.start();
 });
 
 detener.addEventListener('click', (err) => {
-    // console.log('Detener grabación');
     grabar.classList.remove('btn_selection_selected');
     grabar.disabled = false;
     detener.disabled = true;
-    rec.stop();
+    recognition.stop();
+
+    const info = { 'texto': texto.value };
+    const datos = new FormData();
+    for(let llave in info){
+        datos.append(llave, info[llave]);
+    }
+
+    const http = new XMLHttpRequest();
+    http.onreadystatechange = (e) => {
+        
+    }
+    
 });

@@ -1,5 +1,5 @@
 const { app, BrowserWindow, Tray, nativeImage } = require('electron');
-// const { spawn } = require('child_process');
+const { spawn } = require('child_process');
 const url = require('url');
 const path = require('path');
 const os = require('os');
