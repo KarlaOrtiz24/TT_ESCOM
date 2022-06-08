@@ -76,17 +76,17 @@ def traduccionVoz():
         
         print(frase)
         
-        glosa = nlp.nlp(frase)
+        glosa = nlp.nlp(str(frase))
         print(glosa)
         
-        data = []
-        for dato in glosa:
-            data += mostrarGlosa.obtenerData(dato)
-            # print(type(dato))
-            
-        print(data)
+        videos = routes.getArchivosCarpeta(routes.juntarConPadre(__file__, 'BD'))
+        # print(videos)
         
         resp = {}
+        
+        for palabra in glosa:
+            if palabra + '.mp4' in videos:
+                resp[palabra] = palabra + '.mp4'
         
         return jsonify(resp)
 

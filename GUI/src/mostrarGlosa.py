@@ -1,6 +1,6 @@
 import cv2
 import pymongo
-from tkinter import *
+# from tkinter import *
 import Routes.Routes as routes
 
 cliente = pymongo.MongoClient( "mongodb+srv://user:1234@cluster0.aovos.mongodb.net/test")
